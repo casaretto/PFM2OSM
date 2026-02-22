@@ -1,0 +1,2 @@
+appframework-1.0.3.jar:
+http://search.maven.org/remotecontent?filepath=org/jdesktop/appframework/1.0.3/appframework-1.0.3.jar

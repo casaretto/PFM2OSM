@@ -1,0 +1,645 @@
+/*
+ * DesktopApplication1View.java
+ */
+package mptoosm;
+
+import mptoosm.mp.LerMP;
+import org.jdesktop.application.Action;
+import org.jdesktop.application.ResourceMap;
+import org.jdesktop.application.SingleFrameApplication;
+import org.jdesktop.application.FrameView;
+import org.jdesktop.application.Task;
+import org.jdesktop.application.TaskMonitor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
+import javax.swing.Timer;
+import javax.swing.Icon;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+/**
+ * The application's main frame.
+ */
+public class DesktopApplication1View extends FrameView {
+
+    JFileChooser jFileChooserCaminhoArquivo = new JFileChooser();
+    List<File> listadeArquivos = new ArrayList<File>();
+    public static LerMP lerArquivoMp = new LerMP();
+    // Get current time
+    long start = 0, tempo_total=0;
+
+    public DesktopApplication1View(SingleFrameApplication app) {
+        super(app);
+
+        initComponents();
+        iniciaObjetos();
+
+        // status bar initialization - message timeout, idle icon and busy animation, etc
+        ResourceMap resourceMap = getResourceMap();
+        int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
+
+
+        messageTimer = new Timer(messageTimeout, new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                statusMessageLabel.setText("");
+            }
+        });
+        messageTimer.setRepeats(false);
+        int busyAnimationRate = resourceMap.getInteger("StatusBar.busyAnimationRate");
+        for (int i = 0; i < busyIcons.length; i++) {
+            busyIcons[i] = resourceMap.getIcon("StatusBar.busyIcons[" + i + "]");
+        }
+        busyIconTimer = new Timer(busyAnimationRate, new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                busyIconIndex = (busyIconIndex + 1) % busyIcons.length;
+                statusAnimationLabel.setIcon(busyIcons[busyIconIndex]);
+                jLabelMessage.setText(LerMP.mensagem.toString());
+                jLabelPorcentagem.setText(LerMP.porcentagem.toString());
+                // Get elapsed time in milliseconds
+
+                long currentTime = System.currentTimeMillis();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss's'");
+
+                dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+                long elapsed = currentTime - start;
+                jLabelSec.setText(dateFormat.format(new Date(elapsed)));
+
+            }
+        });
+        idleIcon = resourceMap.getIcon("StatusBar.idleIcon");
+        statusAnimationLabel.setIcon(idleIcon);
+
+
+        // connecting action tasks to status bar via TaskMonitor
+        TaskMonitor taskMonitor = new TaskMonitor(getApplication().getContext());
+        taskMonitor.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                String propertyName = evt.getPropertyName();
+                if ("started".equals(propertyName)) {
+                    if (!busyIconTimer.isRunning()) {
+                        statusAnimationLabel.setIcon(busyIcons[0]);
+                        busyIconIndex = 0;
+                        start = System.currentTimeMillis();
+                        busyIconTimer.start();
+                    }
+                } else if ("done".equals(propertyName)) {
+                    busyIconTimer.stop();
+                    statusAnimationLabel.setIcon(idleIcon);
+                } else if ("message".equals(propertyName)) {
+                    String text = (String) (evt.getNewValue());
+                    statusMessageLabel.setText((text == null) ? "" : text);
+                    messageTimer.restart();
+                } else if ("progress".equals(propertyName)) {
+                    int value = (Integer) (evt.getNewValue());
+
+                }
+            }
+        });
+
+        this.jCheckBoxLimitObjCount.setVisible(false);
+        this.jTextFieldLimitObjCount.setVisible(false);
+
+    }
+
+    @Action
+    public void showAboutBox() {
+        if (aboutBox == null) {
+            JFrame mainFrame = DesktopApplication1.getApplication().getMainFrame();
+            aboutBox = new DesktopApplication1AboutBox(mainFrame);
+            aboutBox.setLocationRelativeTo(mainFrame);
+        }
+        DesktopApplication1.getApplication().show(aboutBox);
+    }
+
+    /** This method is called from within the constructor to
+     * initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is
+     * always regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        mainPanel = new javax.swing.JPanel();
+        jButtonConverter = new javax.swing.JButton();
+        jLabelSec = new javax.swing.JLabel();
+        jCheckBoxBin = new javax.swing.JCheckBox();
+        jCheckBoxAlertas = new javax.swing.JCheckBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea_Detalhe = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtUser = new javax.swing.JTextField();
+        txtUID = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jCheckBoxUC = new javax.swing.JCheckBox();
+        jCheckBoxMaptoolSyntax = new javax.swing.JCheckBox();
+        jCheckBoxStarForUnrecAttr = new javax.swing.JCheckBox();
+        jCheckBoxPositiveIDs = new javax.swing.JCheckBox();
+        jCheckBoxActionModify = new javax.swing.JCheckBox();
+        jCheckBoxUploadTrue = new javax.swing.JCheckBox();
+        jCheckBoxLimitObjCount = new javax.swing.JCheckBox();
+        jTextFieldLimitObjCount = new javax.swing.JTextField();
+        menuBar = new javax.swing.JMenuBar();
+        javax.swing.JMenu fileMenu = new javax.swing.JMenu();
+        javax.swing.JMenuItem exitMenuItem = new javax.swing.JMenuItem();
+        javax.swing.JMenu helpMenu = new javax.swing.JMenu();
+        javax.swing.JMenuItem aboutMenuItem = new javax.swing.JMenuItem();
+        statusPanel = new javax.swing.JPanel();
+        javax.swing.JSeparator statusPanelSeparator = new javax.swing.JSeparator();
+        statusMessageLabel = new javax.swing.JLabel();
+        statusAnimationLabel = new javax.swing.JLabel();
+        jLabelMessage = new javax.swing.JLabel();
+        jLabelPorcentagem = new javax.swing.JLabel();
+
+        mainPanel.setName("mainPanel"); // NOI18N
+
+        javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance().getContext().getActionMap(DesktopApplication1View.class, this);
+        jButtonConverter.setAction(actionMap.get("Converter")); // NOI18N
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance().getContext().getResourceMap(DesktopApplication1View.class);
+        jButtonConverter.setText(resourceMap.getString("jButtonConverter.text")); // NOI18N
+        jButtonConverter.setName("jButtonConverter"); // NOI18N
+
+        jLabelSec.setText(resourceMap.getString("jLabelSec.text")); // NOI18N
+        jLabelSec.setToolTipText(resourceMap.getString("jLabelSec.toolTipText")); // NOI18N
+        jLabelSec.setName("jLabelSec"); // NOI18N
+
+        jCheckBoxBin.setFont(resourceMap.getFont("jCheckBoxBin.font")); // NOI18N
+        jCheckBoxBin.setText(resourceMap.getString("jCheckBoxBin.text")); // NOI18N
+        jCheckBoxBin.setName("jCheckBoxBin"); // NOI18N
+
+        jCheckBoxAlertas.setFont(resourceMap.getFont("jCheckBoxAlertas.font")); // NOI18N
+        jCheckBoxAlertas.setText(resourceMap.getString("jCheckBoxAlertas.text")); // NOI18N
+        jCheckBoxAlertas.setName("jCheckBoxAlertas"); // NOI18N
+
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
+
+        jTextArea_Detalhe.setColumns(20);
+        jTextArea_Detalhe.setEditable(false);
+        jTextArea_Detalhe.setRows(5);
+        jTextArea_Detalhe.setName("jTextArea_Detalhe"); // NOI18N
+        jScrollPane1.setViewportView(jTextArea_Detalhe);
+
+        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
+        jLabel1.setName("jLabel1"); // NOI18N
+
+        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
+        jLabel2.setName("jLabel2"); // NOI18N
+
+        txtUser.setText(resourceMap.getString("txtUser.text")); // NOI18N
+        txtUser.setName("txtUser"); // NOI18N
+        txtUser.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtUserFocusLost(evt);
+            }
+        });
+        txtUser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                txtUserPropertyChange(evt);
+            }
+        });
+        txtUser.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                txtUserVetoableChange(evt);
+            }
+        });
+
+        txtUID.setName("txtUID"); // NOI18N
+        txtUID.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtUIDFocusLost(evt);
+            }
+        });
+
+        jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
+        jLabel3.setName("jLabel3"); // NOI18N
+
+        jCheckBoxUC.setFont(resourceMap.getFont("jCheckBoxUC.font")); // NOI18N
+        jCheckBoxUC.setText(resourceMap.getString("jCheckBoxUC.text")); // NOI18N
+        jCheckBoxUC.setName("jCheckBoxUC"); // NOI18N
+        jCheckBoxUC.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBoxUCStateChanged(evt);
+            }
+        });
+
+        jCheckBoxMaptoolSyntax.setFont(resourceMap.getFont("jCheckBoxMaptoolSyntax.font")); // NOI18N
+        jCheckBoxMaptoolSyntax.setText(resourceMap.getString("jCheckBoxMaptoolSyntax.text")); // NOI18N
+        jCheckBoxMaptoolSyntax.setName("jCheckBoxMaptoolSyntax"); // NOI18N
+        jCheckBoxMaptoolSyntax.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBoxMaptoolSyntaxStateChanged(evt);
+            }
+        });
+
+        jCheckBoxStarForUnrecAttr.setFont(resourceMap.getFont("jCheckBoxStarForUnrecAttr.font")); // NOI18N
+        jCheckBoxStarForUnrecAttr.setText(resourceMap.getString("jCheckBoxStarForUnrecAttr.text")); // NOI18N
+        jCheckBoxStarForUnrecAttr.setName("jCheckBoxStarForUnrecAttr"); // NOI18N
+        jCheckBoxStarForUnrecAttr.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBoxStarForUnrecAttrStateChanged(evt);
+            }
+        });
+
+        jCheckBoxPositiveIDs.setFont(resourceMap.getFont("jCheckBoxPositiveIDs.font")); // NOI18N
+        jCheckBoxPositiveIDs.setText(resourceMap.getString("jCheckBoxPositiveIDs.text")); // NOI18N
+        jCheckBoxPositiveIDs.setName("jCheckBoxPositiveIDs"); // NOI18N
+        jCheckBoxPositiveIDs.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBoxPositiveIDsStateChanged(evt);
+            }
+        });
+
+        jCheckBoxActionModify.setFont(resourceMap.getFont("jCheckBoxActionModify.font")); // NOI18N
+        jCheckBoxActionModify.setText(resourceMap.getString("jCheckBoxActionModify.text")); // NOI18N
+        jCheckBoxActionModify.setName("jCheckBoxActionModify"); // NOI18N
+        jCheckBoxActionModify.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBoxActionModifyStateChanged(evt);
+            }
+        });
+
+        jCheckBoxUploadTrue.setFont(resourceMap.getFont("jCheckBoxUploadTrue.font")); // NOI18N
+        jCheckBoxUploadTrue.setText(resourceMap.getString("jCheckBoxUploadTrue.text")); // NOI18N
+        jCheckBoxUploadTrue.setName("jCheckBoxUploadTrue"); // NOI18N
+        jCheckBoxUploadTrue.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBoxUploadTrueStateChanged(evt);
+            }
+        });
+
+        jCheckBoxLimitObjCount.setFont(resourceMap.getFont("jCheckBoxLimitObjCount.font")); // NOI18N
+        jCheckBoxLimitObjCount.setText(resourceMap.getString("jCheckBoxLimitObjCount.text")); // NOI18N
+        jCheckBoxLimitObjCount.setName("jCheckBoxLimitObjCount"); // NOI18N
+        jCheckBoxLimitObjCount.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBoxLimitObjCountStateChanged(evt);
+            }
+        });
+
+        jTextFieldLimitObjCount.setText(resourceMap.getString("jTextFieldLimitObjCount.text")); // NOI18N
+        jTextFieldLimitObjCount.setName("jTextFieldLimitObjCount"); // NOI18N
+        jTextFieldLimitObjCount.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldLimitObjCountFocusLost(evt);
+            }
+        });
+
+        javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
+        mainPanel.setLayout(mainPanelLayout);
+        mainPanelLayout.setHorizontalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 932, Short.MAX_VALUE)
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtUID, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3)
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(jButtonConverter)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                                .addComponent(jCheckBoxPositiveIDs)
+                                .addGap(37, 37, 37)
+                                .addComponent(jCheckBoxActionModify)
+                                .addGap(27, 27, 27)
+                                .addComponent(jCheckBoxUploadTrue)
+                                .addGap(18, 18, 18)
+                                .addComponent(jCheckBoxLimitObjCount)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldLimitObjCount, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabelSec, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(mainPanelLayout.createSequentialGroup()
+                                .addComponent(jCheckBoxBin)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBoxAlertas)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBoxUC)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBoxMaptoolSyntax)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBoxStarForUnrecAttr)))))
+                .addContainerGap())
+        );
+        mainPanelLayout.setVerticalGroup(
+            mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonConverter)
+                    .addComponent(jCheckBoxBin)
+                    .addComponent(jCheckBoxAlertas)
+                    .addComponent(jCheckBoxUC)
+                    .addComponent(jCheckBoxMaptoolSyntax)
+                    .addComponent(jCheckBoxStarForUnrecAttr))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelSec)
+                    .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jCheckBoxPositiveIDs)
+                        .addComponent(jCheckBoxActionModify)
+                        .addComponent(jCheckBoxUploadTrue)
+                        .addComponent(jCheckBoxLimitObjCount)
+                        .addComponent(jTextFieldLimitObjCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(30, 30, 30))
+        );
+
+        menuBar.setName("menuBar"); // NOI18N
+
+        fileMenu.setText(resourceMap.getString("fileMenu.text")); // NOI18N
+        fileMenu.setActionCommand(resourceMap.getString("fileMenu.actionCommand")); // NOI18N
+        fileMenu.setName("fileMenu"); // NOI18N
+
+        exitMenuItem.setAction(actionMap.get("quit")); // NOI18N
+        exitMenuItem.setText(resourceMap.getString("exitMenuItem.text")); // NOI18N
+        exitMenuItem.setActionCommand(resourceMap.getString("exitMenuItem.actionCommand")); // NOI18N
+        exitMenuItem.setName("exitMenuItem"); // NOI18N
+        fileMenu.add(exitMenuItem);
+
+        menuBar.add(fileMenu);
+
+        helpMenu.setText(resourceMap.getString("helpMenu.text")); // NOI18N
+        helpMenu.setActionCommand(resourceMap.getString("helpMenu.actionCommand")); // NOI18N
+        helpMenu.setName("helpMenu"); // NOI18N
+
+        aboutMenuItem.setAction(actionMap.get("showAboutBox")); // NOI18N
+        aboutMenuItem.setText(resourceMap.getString("aboutMenuItem.text")); // NOI18N
+        aboutMenuItem.setActionCommand(resourceMap.getString("aboutMenuItem.actionCommand")); // NOI18N
+        aboutMenuItem.setName("aboutMenuItem"); // NOI18N
+        helpMenu.add(aboutMenuItem);
+
+        menuBar.add(helpMenu);
+
+        statusPanel.setName("statusPanel"); // NOI18N
+
+        statusPanelSeparator.setName("statusPanelSeparator"); // NOI18N
+
+        statusMessageLabel.setName("statusMessageLabel"); // NOI18N
+
+        statusAnimationLabel.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        statusAnimationLabel.setName("statusAnimationLabel"); // NOI18N
+
+        jLabelMessage.setText(resourceMap.getString("jLabelMessage.text")); // NOI18N
+        jLabelMessage.setName("jLabelMessage"); // NOI18N
+
+        jLabelPorcentagem.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabelPorcentagem.setText(resourceMap.getString("jLabelPorcentagem.text")); // NOI18N
+        jLabelPorcentagem.setName("jLabelPorcentagem"); // NOI18N
+
+        javax.swing.GroupLayout statusPanelLayout = new javax.swing.GroupLayout(statusPanel);
+        statusPanel.setLayout(statusPanelLayout);
+        statusPanelLayout.setHorizontalGroup(
+            statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 952, Short.MAX_VALUE)
+            .addGroup(statusPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(statusMessageLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelPorcentagem, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(statusAnimationLabel)
+                .addContainerGap())
+        );
+        statusPanelLayout.setVerticalGroup(
+            statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(statusPanelLayout.createSequentialGroup()
+                .addComponent(statusPanelSeparator, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(statusPanelLayout.createSequentialGroup()
+                        .addGroup(statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(statusMessageLabel)
+                            .addComponent(statusAnimationLabel))
+                        .addGap(3, 3, 3))
+                    .addComponent(jLabelMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelPorcentagem)))
+        );
+
+        setComponent(mainPanel);
+        setMenuBar(menuBar);
+        setStatusBar(statusPanel);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void txtUserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtUserPropertyChange
+        //System.out.println("gdggdgd");
+    }//GEN-LAST:event_txtUserPropertyChange
+
+    private void txtUserVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_txtUserVetoableChange
+        //System.out.println("gdggdgd");
+    }//GEN-LAST:event_txtUserVetoableChange
+
+    private void txtUserFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUserFocusLost
+        if( this.txtUser.getText().isEmpty() )
+            LerMP.user = " ";
+        else
+            LerMP.user = " user=\"" + this.txtUser.getText() + "\"";
+    }//GEN-LAST:event_txtUserFocusLost
+
+    private void txtUIDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtUIDFocusLost
+        if( this.txtUID.getText().isEmpty() )
+            LerMP.uid = " ";
+        else
+            LerMP.uid = " uid=\"" + this.txtUID.getText() + "\"";
+    }//GEN-LAST:event_txtUIDFocusLost
+
+    private void jCheckBoxUCStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBoxUCStateChanged
+        LerMP.boolConvertLabelsToUpperCase = this.jCheckBoxUC.isSelected();
+    }//GEN-LAST:event_jCheckBoxUCStateChanged
+
+    private void jCheckBoxMaptoolSyntaxStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBoxMaptoolSyntaxStateChanged
+        LerMP.boolIncludeInfoForCompilers = this.jCheckBoxMaptoolSyntax.isSelected();
+    }//GEN-LAST:event_jCheckBoxMaptoolSyntaxStateChanged
+
+    private void jCheckBoxStarForUnrecAttrStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBoxStarForUnrecAttrStateChanged
+        LerMP.boolCreateStarTagsForUnrecognizesPFMAttributes = this.jCheckBoxStarForUnrecAttr.isSelected();
+        LerMP.poi.reinicia_poi_points();
+        LerMP.polyline.reinicia_polyline_ways();
+        LerMP.polyline_area.reinicia_polyline_area_ways();
+    }//GEN-LAST:event_jCheckBoxStarForUnrecAttrStateChanged
+
+    private void jCheckBoxPositiveIDsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBoxPositiveIDsStateChanged
+        // TODO add your handling code here:
+        LerMP.boolGeneratePositiveIDs = this.jCheckBoxPositiveIDs.isSelected();
+        if( LerMP.boolGeneratePositiveIDs )
+            LerMP.strIDsSignal = "";
+        else
+            LerMP.strIDsSignal = "-";
+    }//GEN-LAST:event_jCheckBoxPositiveIDsStateChanged
+
+    private void jCheckBoxActionModifyStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBoxActionModifyStateChanged
+        // TODO add your handling code here:
+        LerMP.boolIncludeActionModify = this.jCheckBoxActionModify.isSelected();
+        if( LerMP.boolIncludeActionModify )
+            LerMP.strIncludeActionModify = " action=\"modify\" ";
+        else
+            LerMP.strIncludeActionModify = "";
+    }//GEN-LAST:event_jCheckBoxActionModifyStateChanged
+
+    private void jCheckBoxUploadTrueStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBoxUploadTrueStateChanged
+        // TODO add your handling code here:
+        LerMP.boolIncludeUploadTrue = this.jCheckBoxUploadTrue.isSelected();
+    }//GEN-LAST:event_jCheckBoxUploadTrueStateChanged
+
+    private void jCheckBoxLimitObjCountStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBoxLimitObjCountStateChanged
+        // TODO add your handling code here:
+        LerMP.boolLimitObjCount = this.jCheckBoxLimitObjCount.isSelected();
+    }//GEN-LAST:event_jCheckBoxLimitObjCountStateChanged
+
+    private void jTextFieldLimitObjCountFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldLimitObjCountFocusLost
+        try{
+            LerMP.iLimitObjCount = Integer.parseInt( this.jTextFieldLimitObjCount.getText() );
+        }catch (Exception ex){
+            this.jTextFieldLimitObjCount.setText( String.valueOf( LerMP.iLimitObjCount ) );
+            JOptionPane.showMessageDialog(this.getFrame(), ex.getMessage(), "User input error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jTextFieldLimitObjCountFocusLost
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonConverter;
+    private javax.swing.JCheckBox jCheckBoxActionModify;
+    private javax.swing.JCheckBox jCheckBoxAlertas;
+    private javax.swing.JCheckBox jCheckBoxBin;
+    private javax.swing.JCheckBox jCheckBoxLimitObjCount;
+    private javax.swing.JCheckBox jCheckBoxMaptoolSyntax;
+    private javax.swing.JCheckBox jCheckBoxPositiveIDs;
+    private javax.swing.JCheckBox jCheckBoxStarForUnrecAttr;
+    private javax.swing.JCheckBox jCheckBoxUC;
+    private javax.swing.JCheckBox jCheckBoxUploadTrue;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabelMessage;
+    private javax.swing.JLabel jLabelPorcentagem;
+    private javax.swing.JLabel jLabelSec;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea_Detalhe;
+    private javax.swing.JTextField jTextFieldLimitObjCount;
+    private javax.swing.JPanel mainPanel;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JLabel statusAnimationLabel;
+    private javax.swing.JLabel statusMessageLabel;
+    private javax.swing.JPanel statusPanel;
+    private javax.swing.JTextField txtUID;
+    private javax.swing.JTextField txtUser;
+    // End of variables declaration//GEN-END:variables
+    private final Timer messageTimer;
+    private final Timer busyIconTimer;
+    private final Icon idleIcon;
+    private final Icon[] busyIcons = new Icon[15];
+    private int busyIconIndex = 0;
+    private JDialog aboutBox;
+
+    private void iniciaObjetos() {
+        FileFilter filtroMpf = new FileNameExtensionFilter("Mapa de Texto .mp ", "mp");
+        jFileChooserCaminhoArquivo.setFileFilter(filtroMpf);
+        jFileChooserCaminhoArquivo.setMultiSelectionEnabled(true);
+
+    }
+
+    @Action
+    public Task Converter() {
+        return new ConverterTask(getApplication());
+    }
+
+    private class ConverterTask extends org.jdesktop.application.Task<Object, Void> {
+
+        ConverterTask(org.jdesktop.application.Application app) {
+            // Runs on the EDT.  Copy GUI state that
+            // doInBackground() depends on from parameters
+            // to ConverterTask fields, here.
+            super(app);
+        }
+
+        protected Object doInBackground() {
+
+            if (jFileChooserCaminhoArquivo.showOpenDialog(jButtonConverter) == JFileChooser.APPROVE_OPTION) {
+
+                listadeArquivos.clear();
+                jTextArea_Detalhe.setText("***************Processando mapas***************\n");
+                adicionaArquivos(jFileChooserCaminhoArquivo.getSelectedFiles());
+                if (listadeArquivos.size() > 0) {
+
+                    for (File arquivo : listadeArquivos) {
+                        lerArquivoMp = new LerMP();
+                        lerArquivoMp.setArquivo(arquivo);
+                        lerArquivoMp.maisDeUmMapaConvertido = listadeArquivos.indexOf(arquivo);
+                        if (lerArquivoMp.maisDeUmMapaConvertido == listadeArquivos.size() - 1) {
+                            lerArquivoMp.ultimoMapaParaProcessa = true;
+                        }
+                        lerArquivoMp.isRunMaptool = jCheckBoxBin.isSelected();
+                        LerMP.isCriarAlertas = jCheckBoxAlertas.isSelected();
+                        start = System.currentTimeMillis();
+                        lerArquivoMp.run();
+                        jTextArea_Detalhe.append(arquivo.getName()+"   ***   "+
+                                arquivo.length()+" bytes   ***   " +lerArquivoMp.linhasTotal+
+                                " linhas   ***   em ");
+                        atualizaTempoDetalhe(start);
+                    }
+//                    LerMP.osmElementoId = 0;
+                    jLabelMessage.setText("Mapa(s) convertidos");
+                    jLabelPorcentagem.setText("100%");
+                    System.out.println("\n************************************\n\t\tMapa convertido\n************************************");
+
+                }
+            }
+            return null;  // return your result
+        }
+
+        protected void succeeded(Object result) {
+            // Runs on the EDT.  Update the GUI based on
+            // the result computed by doInBackground().
+        }
+    }
+
+    void adicionaArquivos(File[] Arquivos) {
+
+        listadeArquivos.addAll(Arrays.asList(Arquivos));
+    }
+
+    void atualizaTempoDetalhe(long inicio) {
+        long currentTime = System.currentTimeMillis();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss's'");
+
+        dateFormat.setTimeZone(TimeZone.getTimeZone("GMT"));
+        long elapsed = currentTime - inicio;
+        tempo_total+=elapsed;
+        jTextArea_Detalhe.append(dateFormat.format(new Date(elapsed))+
+                " no Total de "+dateFormat.format(new Date(tempo_total))+"\n");
+
+    }
+}
