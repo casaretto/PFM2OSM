@@ -155,10 +155,37 @@ public class FormataOsmTag {
             return retorno;
         String[] tag_v = tags.split("=");
         if(tag_v.length>1){
-            retorno.append("\n  <tag k=\"").append(tag_v[0]).append("\" v=\"").append(tag_v[1]).append("\"/>");
+            String escapedValue = escapeXmlSpecialCharacters(tag_v[1]);
+            retorno.append("\n  <tag k=\"").append(tag_v[0]).append("\" v=\"").append(escapedValue).append("\"/>");
         } else { //tag value missing: give zero-length string as default
             retorno.append("\n  <tag k=\"").append(tag_v[0]).append("\" v=\"").append(" ").append("\"/>");
         }
         return retorno;
+    }
+
+    /**
+     * Escapa caracteres especiais do XML para valores de atributos
+     * Converte & para &amp;, < para &lt;, > para &gt;, " para &quot;, ' para &apos;
+     * também converte & para e quando apropriado (simplificação para casos de "&")
+     * @param value valor a ser escapado
+     * @return valor com caracteres especiais escapados
+     */
+    private static String escapeXmlSpecialCharacters(String value) {
+        if (value == null || value.isEmpty()) {
+            return value;
+        }
+        
+        // Substituir & por &amp; (deve ser feito primeiro!)
+        value = value.replace("&", "&amp;");
+        // Substituir < por &lt;
+        value = value.replace("<", "&lt;");
+        // Substituir > por &gt;
+        value = value.replace(">", "&gt;");
+        // Substituir " por &quot;
+        value = value.replace("\"", "&quot;");
+        // Substituir ' por &apos;
+        value = value.replace("'", "&apos;");
+        
+        return value;
     }
 }
