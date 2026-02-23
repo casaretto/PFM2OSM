@@ -47,7 +47,11 @@ public class DesktopApplication1View extends FrameView {
 
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
-        int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
+        Integer messageTimeoutObj = resourceMap.getInteger("StatusBar.messageTimeout");
+        int messageTimeout = (messageTimeoutObj != null) ? messageTimeoutObj.intValue() : 5000;
+        if (messageTimeoutObj == null) {
+            System.err.println("[ERRO] StatusBar.messageTimeout não encontrado no ResourceMap. Usando valor padrão 5000.");
+        }
 
 
         messageTimer = new Timer(messageTimeout, new ActionListener() {
@@ -57,7 +61,11 @@ public class DesktopApplication1View extends FrameView {
             }
         });
         messageTimer.setRepeats(false);
-        int busyAnimationRate = resourceMap.getInteger("StatusBar.busyAnimationRate");
+        Integer busyAnimationRateObj = resourceMap.getInteger("StatusBar.busyAnimationRate");
+        int busyAnimationRate = (busyAnimationRateObj != null) ? busyAnimationRateObj.intValue() : 30;
+        if (busyAnimationRateObj == null) {
+            System.err.println("[ERRO] StatusBar.busyAnimationRate não encontrado no ResourceMap. Usando valor padrão 30.");
+        }
         for (int i = 0; i < busyIcons.length; i++) {
             busyIcons[i] = resourceMap.getIcon("StatusBar.busyIcons[" + i + "]");
         }

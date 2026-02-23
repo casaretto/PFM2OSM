@@ -112,7 +112,8 @@ public class LerMP implements Runnable {
     public static boolean boolIncludeInfoForCompilers = false;
     public static boolean boolCreateStarTagsForUnrecognizesPFMAttributes = false;
     public static boolean boolGeneratePositiveIDs = false;
-    public static String strIDsSignal = "-";
+    // IDs OSM agora sempre positivos para compatibilidade mkgmap
+    public static String strIDsSignal = "";
     public static boolean boolIncludeActionModify = false;
     public static String strIncludeActionModify = "";
     public static boolean boolIncludeUploadTrue = false;
@@ -149,6 +150,10 @@ public class LerMP implements Runnable {
     }
 
     public static int getProximoElementoOsmId() {
+        // Garante que IDs OSM sejam sempre positivos (compatível com mkgmap)
+        if (osmElementoId < 1) {
+            osmElementoId = 1;
+        }
         return osmElementoId++;
     }
     

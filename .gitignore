@@ -30,6 +30,7 @@ Thumbs.db
 
 # Build
 *.class
+!PFM2OSM.jar
 *.jar
 *.war
 *.ear

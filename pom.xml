@@ -54,6 +54,17 @@
 
     <build>
         <sourceDirectory>src</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/mptoosm/resources</directory>
+                <targetPath>mptoosm/resources</targetPath>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.png</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
         <plugins>
             <!-- Maven Compiler Plugin -->
             <plugin>
