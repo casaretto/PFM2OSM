@@ -14,11 +14,11 @@
     <description>Conversor de formato PFM (Polish Format Map) para OSM (OpenStreetMap)</description>
 
     <properties>
-        <project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
-        <maven.compiler.encoding>ISO-8859-1</maven.compiler.encoding>
+        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
     </properties>
 
     <dependencies>
@@ -73,7 +73,7 @@
                 <version>3.11.0</version>
                 <configuration>
                     <release>21</release>
-                    <encoding>ISO-8859-1</encoding>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
 

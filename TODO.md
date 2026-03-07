@@ -1,57 +1,57 @@
 # TODO - PFM2OSM Converter
 
-## ?? Prioridade Alta - CorreÁıes Necess·rias
+## ?? Prioridade Alta - Corre√ß√µes Necess√°rias
 
 ### 1. Encoding de Caracteres
-- [ ] **Problema**: Warnings de caracteres UTF-8 n„o mape·veis durante compilaÁ„o
+- [ ] **Problema**: Warnings de caracteres UTF-8 n√£o mape√°veis durante compila√ß√£o
   - Linhas afetadas: 43, 51, 84, 85, 267, 294, 339, 374, 487, 574, 615 em `LerMP.java`
-  - **SoluÁ„o**: Converter coment·rios e strings para UTF-8 correto ou usar escape sequences
-  - **Impacto**: Baixo - apenas warnings, n„o afeta funcionalidade
+  - **Solu√ß√£o**: Converter coment√°rios e strings para UTF-8 correto ou usar escape sequences
+  - **Impacto**: Baixo - apenas warnings, n√£o afeta funcionalidade
 
 ### 2. APIs Deprecadas
 - [ ] **Float(double) e Float(float) constructors**
   - Arquivo: `Node.java` linha 201
   - Arquivo: `Util.java` linha 54
-  - **SoluÁ„o**: Usar `Float.valueOf()` ao invÈs de `new Float()`
-  - **Impacto**: MÈdio - marcado para remoÁ„o em versıes futuras do Java
+  - **Solu√ß√£o**: Usar `Float.valueOf()` ao inv√©s de `new Float()`
+  - **Impacto**: M√©dio - marcado para remo√ß√£o em vers√µes futuras do Java
 
-### 3. ConfiguraÁ„o Maven
-- [ ] Adicionar `--release 11` ao invÈs de `-source 11 -target 11`
-  - Atualizar `pom.xml` para usar release ao invÈs de source/target separados
-  - **BenefÌcio**: Melhor compatibilidade e warnings mais precisos
+### 3. Configura√ß√£o Maven
+- [ ] Adicionar `--release 11` ao inv√©s de `-source 11 -target 11`
+  - Atualizar `pom.xml` para usar release ao inv√©s de source/target separados
+  - **Benef√≠cio**: Melhor compatibilidade e warnings mais precisos
 
-## ?? Prioridade MÈdia - Melhorias
+## ?? Prioridade M√©dia - Melhorias
 
-### 4. Testes Unit·rios
+### 4. Testes Unit√°rios
 - [ ] Criar estrutura de testes
 - [ ] Adicionar testes para parser PFM
-- [ ] Adicionar testes para geraÁ„o OSM
-- [ ] Adicionar testes para convers„o de coordenadas
+- [ ] Adicionar testes para gera√ß√£o OSM
+- [ ] Adicionar testes para convers√£o de coordenadas
 - [ ] Testar diferentes encodings (CodePage)
 
-### 5. DocumentaÁ„o
+### 5. Documenta√ß√£o
 - [ ] Documentar formato PFM em detalhes
 - [ ] Documentar mapeamento PFM ? OSM tags
 - [ ] Criar exemplos de uso
 - [ ] Documentar tipos de elementos suportados
-- [ ] Adicionar JavaDoc aos mÈtodos principais
+- [ ] Adicionar JavaDoc aos m√©todos principais
 
 ### 6. Interface de Linha de Comando (CLI)
-- [ ] Criar modo CLI alÈm da GUI
-- [ ] Adicionar opÁıes de linha de comando
-- [ ] Permitir convers„o em batch
+- [ ] Criar modo CLI al√©m da GUI
+- [ ] Adicionar op√ß√µes de linha de comando
+- [ ] Permitir convers√£o em batch
 - [ ] Adicionar modo verbose/debug
 
 ### 7. Tratamento de Erros
 - [ ] Melhorar mensagens de erro
-- [ ] Adicionar validaÁ„o de entrada
+- [ ] Adicionar valida√ß√£o de entrada
 - [ ] Criar log estruturado
-- [ ] Adicionar recuperaÁ„o de erros
+- [ ] Adicionar recupera√ß√£o de erros
 
 ## ?? Prioridade Baixa - Funcionalidades Futuras
 
-### 8. ModernizaÁ„o da Interface
-- [ ] Considerar migraÁ„o para JavaFX
+### 8. Moderniza√ß√£o da Interface
+- [ ] Considerar migra√ß√£o para JavaFX
 - [ ] Melhorar UX da interface atual
 - [ ] Adicionar preview do mapa
 - [ ] Adicionar barra de progresso mais detalhada
@@ -60,56 +60,56 @@
 - [ ] Otimizar leitura de arquivos grandes
 - [ ] Implementar processamento paralelo
 - [ ] Adicionar cache de resultados
-- [ ] Profiling e otimizaÁ„o de memÛria
+- [ ] Profiling e otimiza√ß√£o de mem√≥ria
 
-### 10. IntegraÁ„o com TSuite
-- [ ] Estudar mÛdulos do TSuite
-- [ ] Identificar cÛdigo reutiliz·vel
+### 10. Integra√ß√£o com TSuite
+- [ ] Estudar m√≥dulos do TSuite
+- [ ] Identificar c√≥digo reutiliz√°vel
 - [ ] Integrar melhorias do ConversorOsm.java
 - [ ] Sincronizar mapeamentos de tipos
 
 ### 11. Formatos Adicionais
 - [ ] Suporte para outros formatos de entrada
-- [ ] Suporte para outros formatos de saÌda
-- [ ] Convers„o bidirecional (OSM ? PFM)
+- [ ] Suporte para outros formatos de sa√≠da
+- [ ] Convers√£o bidirecional (OSM ? PFM)
 
-### 12. ValidaÁ„o
+### 12. Valida√ß√£o
 - [ ] Validar OSM gerado
 - [ ] Verificar integridade de geometrias
 - [ ] Validar tags OSM
-- [ ] Gerar relatÛrio de qualidade
+- [ ] Gerar relat√≥rio de qualidade
 
 ## ?? Backlog - Ideias
 
 - [ ] Plugin para JOSM (Java OpenStreetMap Editor)
-- [ ] API REST para convers„o online
+- [ ] API REST para convers√£o online
 - [ ] Suporte para streaming de dados grandes
-- [ ] InternacionalizaÁ„o (i18n)
-- [ ] ConfiguraÁ„o via arquivo externo
+- [ ] Internacionaliza√ß√£o (i18n)
+- [ ] Configura√ß√£o via arquivo externo
 - [ ] Suporte para estilos de mapa customizados
-- [ ] IntegraÁ„o com serviÁos de geocoding
-- [ ] ExportaÁ„o para outros formatos GIS
+- [ ] Integra√ß√£o com servi√ßos de geocoding
+- [ ] Exporta√ß√£o para outros formatos GIS
 
 ## ?? Bugs Conhecidos
 
-Nenhum bug crÌtico identificado atÈ o momento.
+Nenhum bug cr√≠tico identificado at√© o momento.
 
-## ? ConcluÌdo
+## ? Conclu√≠do
 
 - [x] Setup inicial do projeto Maven
-- [x] RemoÁ„o de import deprecado `sun.misc.CharacterEncoder`
-- [x] CompilaÁ„o bem-sucedida
-- [x] GeraÁ„o de JAR execut·vel
-- [x] CriaÁ„o de README.md
-- [x] CriaÁ„o de .gitignore
+- [x] Remo√ß√£o de import deprecado `sun.misc.CharacterEncoder`
+- [x] Compila√ß√£o bem-sucedida
+- [x] Gera√ß√£o de JAR execut√°vel
+- [x] Cria√ß√£o de README.md
+- [x] Cria√ß√£o de .gitignore
 
 ## ?? Notas
 
 - O projeto compila com warnings mas funciona
-- Priorizar correÁ„o de APIs deprecadas antes de atualizar para Java 17+
-- Considerar criar branch separada para refatoraÁıes grandes
+- Priorizar corre√ß√£o de APIs deprecadas antes de atualizar para Java 17+
+- Considerar criar branch separada para refatora√ß√µes grandes
 - Manter compatibilidade com arquivos PFM existentes
 
 ---
 
-**⁄ltima atualizaÁ„o**: 2026-02-11
+**√öltima atualiza√ß√£o**: 2026-02-11

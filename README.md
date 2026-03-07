@@ -1,25 +1,25 @@
 # PFM to OSM Converter (pfm2osm)
 
-## ?? DescriÁ„o
+## ?? Descri√ß√£o
 
-Conversor de formato **PFM (Polish Format Map)** para **OSM (OpenStreetMap)**. Este È um projeto legado que est· sendo revitalizado para dar continuidade ao desenvolvimento.
+Conversor de formato **PFM (Polish Format Map)** para **OSM (OpenStreetMap)**. Este √© um projeto legado que est√° sendo revitalizado para dar continuidade ao desenvolvimento.
 
-O formato PFM È um formato de texto utilizado para descrever mapas vetoriais, comumente usado em dispositivos GPS Garmin. Este conversor permite transformar esses arquivos em formato OSM, compatÌvel com ferramentas modernas de mapeamento.
+O formato PFM √© um formato de texto utilizado para descrever mapas vetoriais, comumente usado em dispositivos GPS Garmin. Este conversor permite transformar esses arquivos em formato OSM, compat√≠vel com ferramentas modernas de mapeamento.
 
 ## ?? Funcionalidades
 
-- ? Convers„o de arquivos `.mp` (Polish Format) para `.osm` (OpenStreetMap XML)
-- ? Suporte para m˙ltiplos tipos de elementos:
+- ? Convers√£o de arquivos `.mp` (Polish Format) para `.osm` (OpenStreetMap XML)
+- ? Suporte para m√∫ltiplos tipos de elementos:
   - POIs (Points of Interest)
   - Polylines (Vias/Estradas)
-  - Polygons (¡reas)
-  - RestriÁıes de tr·fego
-  - Cidades e Regiıes
-- ? DetecÁ„o autom·tica de codificaÁ„o de caracteres (CodePage)
-- ? GeraÁ„o de IDs positivos ou negativos para OSM
-- ? Suporte para convers„o de pseudo-3D
-- ? GeraÁ„o de arquivos de alertas (SpeedCam)
-- ? Interface gr·fica Swing
+  - Polygons (√Åreas)
+  - Restri√ß√µes de tr√°fego
+  - Cidades e Regi√µes
+- ? Detec√ß√£o autom√°tica de codifica√ß√£o de caracteres (CodePage)
+- ? Gera√ß√£o de IDs positivos ou negativos para OSM
+- ? Suporte para convers√£o de pseudo-3D
+- ? Gera√ß√£o de arquivos de alertas (SpeedCam)
+- ? Interface gr√°fica Swing
 
 ## ??? Estrutura do Projeto
 
@@ -28,8 +28,8 @@ tensor-pulsar/
 ??? src/
 ?   ??? mptoosm/
 ?       ??? DesktopApplication1.java          # Classe principal
-?       ??? DesktopApplication1View.java      # Interface gr·fica
-?       ??? DesktopApplication1AboutBox.java  # Di·logo About
+?       ??? DesktopApplication1View.java      # Interface gr√°fica
+?       ??? DesktopApplication1AboutBox.java  # Di√°logo About
 ?       ??? elementosMapa/                    # Modelos de dados
 ?       ?   ??? Cities.java
 ?       ?   ??? Node.java
@@ -45,27 +45,27 @@ tensor-pulsar/
 ?           ??? FormataOsmTag.java
 ?           ??? Util.java
 ??? lib/                                       # Bibliotecas JAR
-??? pom.xml                                    # ConfiguraÁ„o Maven
+??? pom.xml                                    # Configura√ß√£o Maven
 ??? README.md
 ```
 
 ## ?? Como Compilar
 
-### PrÈ-requisitos
+### Pr√©-requisitos
 
 - **Java JDK 11** ou superior
 - **Maven 3.6+**
 
-### CompilaÁ„o
+### Compila√ß√£o
 
 ```bash
 # Compilar o projeto
 mvn clean compile
 
-# Criar JAR execut·vel
+# Criar JAR execut√°vel
 mvn clean package
 
-# O JAR ser· gerado em: target/pfm2osm-1.0-SNAPSHOT-jar-with-dependencies.jar
+# O JAR ser√° gerado em: target/pfm2osm-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 
 ## ?? Como Executar
@@ -84,19 +84,19 @@ java -jar target/pfm2osm-1.0-SNAPSHOT-jar-with-dependencies.jar
 
 ## ?? Uso
 
-1. **Abra a aplicaÁ„o** - A interface gr·fica ser· exibida
+1. **Abra a aplica√ß√£o** - A interface gr√°fica ser√° exibida
 2. **Selecione o arquivo PFM** (.mp) que deseja converter
-3. **Configure as opÁıes de convers„o**:
-   - Converter labels para mai˙sculas
+3. **Configure as op√ß√µes de convers√£o**:
+   - Converter labels para mai√∫sculas
    - Gerar IDs positivos
-   - Incluir informaÁıes para compiladores
-   - Criar tags especiais para atributos n„o reconhecidos
+   - Incluir informa√ß√µes para compiladores
+   - Criar tags especiais para atributos n√£o reconhecidos
 4. **Clique em Converter**
-5. **O arquivo OSM** ser· gerado no mesmo diretÛrio do arquivo de entrada
+5. **O arquivo OSM** ser√° gerado no mesmo diret√≥rio do arquivo de entrada
 
 ## ?? Formato PFM
 
-O formato PFM (Polish Format) È um formato de texto que descreve elementos de mapa. Exemplo:
+O formato PFM (Polish Format) √© um formato de texto que descreve elementos de mapa. Exemplo:
 
 ```
 [IMG ID]
@@ -117,42 +117,42 @@ Data0=(12.1,45.2),(12.3,45.4)
 [END]
 ```
 
-## ?? RelaÁ„o com TSuite
+## ?? Rela√ß√£o com TSuite
 
-Este projeto utiliza conceitos e cÛdigo base do projeto **TSuite**, que contÈm mÛdulos Java para leitura e escrita de formatos PFM e OSM. O TSuite est· localizado em `/Users/paulo/TSuite/TSuite/src/br/org/tracksource/tsuite/conversor/`.
+Este projeto utiliza conceitos e c√≥digo base do projeto **TSuite**, que cont√©m m√≥dulos Java para leitura e escrita de formatos PFM e OSM. O TSuite est√° localizado em `/Users/paulo/TSuite/TSuite/src/br/org/tracksource/tsuite/conversor/`.
 
 ## ?? Problemas Conhecidos e Melhorias Futuras
 
-- [ ] Modernizar interface gr·fica (considerar JavaFX)
-- [ ] Adicionar testes unit·rios
+- [ ] Modernizar interface gr√°fica (considerar JavaFX)
+- [ ] Adicionar testes unit√°rios
 - [ ] Melhorar tratamento de erros
 - [ ] Adicionar suporte para mais tipos de elementos PFM
 - [ ] Otimizar performance para arquivos grandes
 - [ ] Adicionar modo CLI (linha de comando)
 - [ ] Documentar formato de tags OSM geradas
 
-## ?? HistÛrico
+## ?? Hist√≥rico
 
-- **Vers„o Original**: Projeto abandonado pelos autores originais
-- **2026-02**: RevitalizaÁ„o do projeto com Maven e Java 11+
+- **Vers√£o Original**: Projeto abandonado pelos autores originais
+- **2026-02**: Revitaliza√ß√£o do projeto com Maven e Java 11+
 
 ## ?? Autores
 
-- **Autor Original**: Pindaro (conforme coment·rios no cÛdigo)
-- **ManutenÁ„o Atual**: Paulo
+- **Autor Original**: Pindaro (conforme coment√°rios no c√≥digo)
+- **Manuten√ß√£o Atual**: Paulo
 
-## ?? LicenÁa
+## ?? Licen√ßa
 
-[Verificar licenÁa original do projeto]
+[Verificar licen√ßa original do projeto]
 
 ## ?? Contribuindo
 
-ContribuiÁıes s„o bem-vindas! Este È um projeto de revitalizaÁ„o de cÛdigo legado.
+Contribui√ß√µes s√£o bem-vindas! Este √© um projeto de revitaliza√ß√£o de c√≥digo legado.
 
 ## ?? Suporte
 
-Para questıes e suporte, abra uma issue no repositÛrio do projeto.
+Para quest√µes e suporte, abra uma issue no reposit√≥rio do projeto.
 
 ---
 
-**Nota**: Este È um projeto em desenvolvimento ativo. Algumas funcionalidades podem estar incompletas ou necessitar de ajustes.
+**Nota**: Este √© um projeto em desenvolvimento ativo. Algumas funcionalidades podem estar incompletas ou necessitar de ajustes.

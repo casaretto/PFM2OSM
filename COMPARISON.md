@@ -1,141 +1,141 @@
-# ComparaÁ„o: PFM2OSM vs TSuite
+# Compara√ß√£o: PFM2OSM vs TSuite
 
-## ?? Vis„o Geral
+## ?? Vis√£o Geral
 
-Este documento compara o projeto **PFM2OSM** (tensor-pulsar) com o projeto **TSuite**, identificando diferenÁas, similaridades e oportunidades de integraÁ„o.
+Este documento compara o projeto **PFM2OSM** (tensor-pulsar) com o projeto **TSuite**, identificando diferen√ßas, similaridades e oportunidades de integra√ß√£o.
 
 ## ??? Estrutura dos Projetos
 
 ### PFM2OSM (tensor-pulsar)
 ```
-LocalizaÁ„o: /Users/paulo/.gemini/antigravity/playground/tensor-pulsar
-Foco: Convers„o PFM ? OSM
+Localiza√ß√£o: /Users/paulo/.gemini/antigravity/playground/tensor-pulsar
+Foco: Convers√£o PFM ? OSM
 Tecnologia: Java 11, Maven, Swing
-Status: Em revitalizaÁ„o
+Status: Em revitaliza√ß√£o
 ```
 
 ### TSuite
 ```
-LocalizaÁ„o: /Users/paulo/TSuite/TSuite
-Foco: Suite completa de convers„o de mapas
+Localiza√ß√£o: /Users/paulo/TSuite/TSuite
+Foco: Suite completa de convers√£o de mapas
 Tecnologia: Java, Maven
-MÛdulos: Garmin, Navitel, OSM, SevenWays
+M√≥dulos: Garmin, Navitel, OSM, SevenWays
 ```
 
-## ?? MÛdulos Relevantes do TSuite
+## ?? M√≥dulos Relevantes do TSuite
 
 ### 1. ConversorOsm.java
-**LocalizaÁ„o**: `src/br/org/tracksource/tsuite/conversor/ConversorOsm.java`
+**Localiza√ß√£o**: `src/br/org/tracksource/tsuite/conversor/ConversorOsm.java`
 
 **Funcionalidades**:
-- Convers„o mais completa para OSM
+- Convers√£o mais completa para OSM
 - Possivelmente mais tipos de elementos suportados
 - Pode ter melhorias de performance
 
 **Oportunidades**:
 - Comparar mapeamentos de tipos
 - Verificar tratamento de casos especiais
-- Identificar otimizaÁıes
+- Identificar otimiza√ß√µes
 
 ### 2. ConversorGarmin.java
-**LocalizaÁ„o**: `src/br/org/tracksource/tsuite/conversor/ConversorGarmin.java`
+**Localiza√ß√£o**: `src/br/org/tracksource/tsuite/conversor/ConversorGarmin.java`
 
-**Relev‚ncia**:
-- Convers„o para formato Garmin
+**Relev√¢ncia**:
+- Convers√£o para formato Garmin
 - Conhecimento de tipos Garmin
-- Pode ter tabelas de mapeamento ˙teis
+- Pode ter tabelas de mapeamento √∫teis
 
 ### 3. Pasta conversor/osm/
-**LocalizaÁ„o**: `src/br/org/tracksource/tsuite/conversor/osm/`
+**Localiza√ß√£o**: `src/br/org/tracksource/tsuite/conversor/osm/`
 
-**Conte˙do**:
+**Conte√∫do**:
 - Possivelmente classes auxiliares para OSM
 - Modelos de dados OSM
-- Utilit·rios de convers„o
+- Utilit√°rios de convers√£o
 
-## ?? DiferenÁas Principais
+## ?? Diferen√ßas Principais
 
 | Aspecto | PFM2OSM | TSuite |
 |---------|---------|--------|
 | **Escopo** | Focado em PFM?OSM | Suite completa multi-formato |
 | **Interface** | GUI Swing dedicada | Possivelmente integrada |
-| **Arquitetura** | Simples, direta | Modular, extensÌvel |
-| **ManutenÁ„o** | Projeto abandonado ? revitalizado | Projeto ativo (?) |
-| **DependÍncias** | MÌnimas | Mais completas |
+| **Arquitetura** | Simples, direta | Modular, extens√≠vel |
+| **Manuten√ß√£o** | Projeto abandonado ? revitalizado | Projeto ativo (?) |
+| **Depend√™ncias** | M√≠nimas | Mais completas |
 
 ## ?? Pontos Fortes de Cada Projeto
 
 ### PFM2OSM
-? Interface gr·fica dedicada e simples  
-? Foco especÌfico em PFM?OSM  
-? CÛdigo mais direto e f·cil de entender  
-? Menos dependÍncias  
-? GeraÁ„o de arquivos SpeedCam  
+? Interface gr√°fica dedicada e simples  
+? Foco espec√≠fico em PFM?OSM  
+? C√≥digo mais direto e f√°cil de entender  
+? Menos depend√™ncias  
+? Gera√ß√£o de arquivos SpeedCam  
 
 ### TSuite
 ? Arquitetura mais robusta  
-? Suporte a m˙ltiplos formatos  
+? Suporte a m√∫ltiplos formatos  
 ? Possivelmente mais tipos de elementos  
-? CÛdigo mais moderno (?)  
-? Melhor organizaÁ„o de pacotes  
+? C√≥digo mais moderno (?)  
+? Melhor organiza√ß√£o de pacotes  
 
-## ?? Oportunidades de IntegraÁ„o
+## ?? Oportunidades de Integra√ß√£o
 
 ### 1. Mapeamentos de Tipos
-**AÁ„o**: Comparar tabelas de mapeamento Garmin ? OSM
+**A√ß√£o**: Comparar tabelas de mapeamento Garmin ? OSM
 - Verificar se TSuite tem tipos adicionais
 - Importar mapeamentos mais completos
-- Sincronizar atualizaÁıes
+- Sincronizar atualiza√ß√µes
 
 ### 2. Parsers
-**AÁ„o**: Comparar lÛgica de parsing
+**A√ß√£o**: Comparar l√≥gica de parsing
 - Verificar tratamento de casos especiais
 - Identificar bugs corrigidos no TSuite
 - Portar melhorias
 
 ### 3. Modelos de Dados
-**AÁ„o**: Comparar classes de elementos
+**A√ß√£o**: Comparar classes de elementos
 - `POI.java` vs equivalente TSuite
 - `Polyline.java` vs equivalente TSuite
 - Identificar atributos adicionais
 
-### 4. Utilit·rios
-**AÁ„o**: Verificar utilit·rios compartilh·veis
-- Convers„o de coordenadas
-- FormataÁ„o de tags
-- ValidaÁ„o de dados
+### 4. Utilit√°rios
+**A√ß√£o**: Verificar utilit√°rios compartilh√°veis
+- Convers√£o de coordenadas
+- Formata√ß√£o de tags
+- Valida√ß√£o de dados
 
 ### 5. Testes
-**AÁ„o**: Verificar se TSuite tem testes
+**A√ß√£o**: Verificar se TSuite tem testes
 - Portar casos de teste
 - Usar mesmos dados de teste
 - Garantir compatibilidade
 
-## ?? Plano de An·lise Comparativa
+## ?? Plano de An√°lise Comparativa
 
-### Fase 1: An·lise Superficial ?
-- [x] Identificar estrutura de diretÛrios
+### Fase 1: An√°lise Superficial ?
+- [x] Identificar estrutura de diret√≥rios
 - [x] Listar arquivos principais
-- [x] Documentar diferenÁas b·sicas
+- [x] Documentar diferen√ßas b√°sicas
 
-### Fase 2: An·lise de CÛdigo (PrÛximos Passos)
+### Fase 2: An√°lise de C√≥digo (Pr√≥ximos Passos)
 - [ ] Comparar `LerMP.java` vs `ConversorOsm.java`
 - [ ] Comparar classes de elementos
-- [ ] Identificar diferenÁas de implementaÁ„o
+- [ ] Identificar diferen√ßas de implementa√ß√£o
 - [ ] Listar funcionalidades exclusivas de cada projeto
 
-### Fase 3: IntegraÁ„o Seletiva
-- [ ] Identificar cÛdigo reutiliz·vel
-- [ ] Portar melhorias especÌficas
+### Fase 3: Integra√ß√£o Seletiva
+- [ ] Identificar c√≥digo reutiliz√°vel
+- [ ] Portar melhorias espec√≠ficas
 - [ ] Manter compatibilidade com PFM existentes
-- [ ] Testar integraÁ„o
+- [ ] Testar integra√ß√£o
 
-### Fase 4: SincronizaÁ„o
-- [ ] Estabelecer processo de sincronizaÁ„o
-- [ ] Documentar diferenÁas intencionais
+### Fase 4: Sincroniza√ß√£o
+- [ ] Estabelecer processo de sincroniza√ß√£o
+- [ ] Documentar diferen√ßas intencionais
 - [ ] Criar testes de compatibilidade
 
-## ??? Tarefas EspecÌficas
+## ??? Tarefas Espec√≠ficas
 
 ### Investigar no TSuite
 
@@ -151,7 +151,7 @@ grep -r "Type.*0x" /Users/paulo/TSuite/TSuite/src/
 grep -r "Data0" /Users/paulo/TSuite/TSuite/src/
 ```
 
-3. **GeraÁ„o OSM**
+3. **Gera√ß√£o OSM**
 ```bash
 # Verificar como TSuite gera XML OSM
 grep -r "<node" /Users/paulo/TSuite/TSuite/src/
@@ -167,68 +167,68 @@ grep -r "CodePage" /Users/paulo/TSuite/TSuite/src/
 ### Portar para PFM2OSM
 
 1. **Melhorias Identificadas**
-   - Listar apÛs an·lise comparativa
+   - Listar ap√≥s an√°lise comparativa
 
 2. **Novos Tipos Suportados**
-   - Adicionar tipos que TSuite suporta e PFM2OSM n„o
+   - Adicionar tipos que TSuite suporta e PFM2OSM n√£o
 
-3. **OtimizaÁıes**
-   - Portar otimizaÁıes de performance
+3. **Otimiza√ß√µes**
+   - Portar otimiza√ß√µes de performance
 
-4. **CorreÁıes de Bugs**
+4. **Corre√ß√µes de Bugs**
    - Verificar se bugs conhecidos foram corrigidos no TSuite
 
 ## ?? Notas de Compatibilidade
 
 ### Manter em PFM2OSM
-- Interface gr·fica Swing (TSuite pode n„o ter)
-- GeraÁ„o de SpeedCam.txt
+- Interface gr√°fica Swing (TSuite pode n√£o ter)
+- Gera√ß√£o de SpeedCam.txt
 - Simplicidade de uso
-- Foco especÌfico em PFM?OSM
+- Foco espec√≠fico em PFM?OSM
 
 ### Considerar do TSuite
 - Arquitetura mais modular
 - Suporte a mais formatos (futuro)
-- Melhores pr·ticas de cÛdigo
-- Testes unit·rios (se existirem)
+- Melhores pr√°ticas de c√≥digo
+- Testes unit√°rios (se existirem)
 
-## ?? LiÁıes Aprendidas
+## ?? Li√ß√µes Aprendidas
 
-### Do CÛdigo Legado (PFM2OSM)
-- Import‚ncia de documentaÁ„o
+### Do C√≥digo Legado (PFM2OSM)
+- Import√¢ncia de documenta√ß√£o
 - Necessidade de testes
 - Problemas com encoding
 - APIs deprecadas
 
 ### Do TSuite (a investigar)
 - Arquitetura modular
-- OrganizaÁ„o de cÛdigo
-- Padrıes de projeto utilizados
+- Organiza√ß√£o de c√≥digo
+- Padr√µes de projeto utilizados
 
-## ?? PrÛximos Passos
+## ?? Pr√≥ximos Passos
 
-1. **An·lise Detalhada do ConversorOsm.java**
+1. **An√°lise Detalhada do ConversorOsm.java**
    - Comparar linha por linha com LerMP.java
-   - Identificar diferenÁas funcionais
+   - Identificar diferen√ßas funcionais
    - Documentar melhorias
 
-2. **ExtraÁ„o de Conhecimento**
+2. **Extra√ß√£o de Conhecimento**
    - Criar tabela de mapeamentos consolidada
    - Documentar casos especiais
    - Listar tipos suportados
 
-3. **IntegraÁ„o Gradual**
-   - ComeÁar com melhorias pequenas
-   - Testar cada mudanÁa
+3. **Integra√ß√£o Gradual**
+   - Come√ßar com melhorias pequenas
+   - Testar cada mudan√ßa
    - Manter compatibilidade
 
-4. **DocumentaÁ„o**
-   - Documentar diferenÁas
+4. **Documenta√ß√£o**
+   - Documentar diferen√ßas
    - Justificar escolhas de design
-   - Manter histÛrico de mudanÁas
+   - Manter hist√≥rico de mudan√ßas
 
 ---
 
-**⁄ltima atualizaÁ„o**: 2026-02-11
+**√öltima atualiza√ß√£o**: 2026-02-11
 
-**Status**: An·lise superficial completa, an·lise detalhada pendente
+**Status**: An√°lise superficial completa, an√°lise detalhada pendente

@@ -1,6 +1,6 @@
-# ?? Projeto PFM2OSM - RevitalizaÁ„o Completa
+# ?? Projeto PFM2OSM - Revitaliza√ß√£o Completa
 
-## ?? LocalizaÁ„o do Projeto
+## ?? Localiza√ß√£o do Projeto
 
 ```bash
 /Users/paulo/.gemini/antigravity/playground/tensor-pulsar
@@ -11,7 +11,7 @@ Para acessar:
 cd ~/.gemini/antigravity/playground/tensor-pulsar
 ```
 
-## ?? InÌcio R·pido
+## ?? In√≠cio R√°pido
 
 ### Compilar e Executar
 ```bash
@@ -29,75 +29,75 @@ java -jar target/pfm2osm-1.0-SNAPSHOT-jar-with-dependencies.jar
 ## ? O Que Foi Feito
 
 ### 1. Setup do Projeto ?
-- ? CÛdigo copiado de `/Users/paulo/pfm2osm-code`
+- ? C√≥digo copiado de `/Users/paulo/pfm2osm-code`
 - ? Estrutura Maven moderna criada
-- ? DependÍncias configuradas
+- ? Depend√™ncias configuradas
 
-### 2. CorreÁıes CrÌticas ?
-- ? **Encoding corrigido**: UTF-8 ? **ISO-8859-1** (compatÌvel com TSuite)
+### 2. Corre√ß√µes Cr√≠ticas ?
+- ? **Encoding corrigido**: UTF-8 ? **ISO-8859-1** (compat√≠vel com TSuite)
 - ? **Import deprecado removido**: `sun.misc.CharacterEncoder`
-- ? **ConfiguraÁ„o Maven otimizada**: Usando `--release 11`
+- ? **Configura√ß√£o Maven otimizada**: Usando `--release 11`
 
 ### 3. Build ?
-- ? **CompilaÁ„o**: BUILD SUCCESS
+- ? **Compila√ß√£o**: BUILD SUCCESS
 - ? **Erros**: 0
-- ? **Warnings**: 2 (APIs deprecadas, n„o crÌticos)
-- ? **JAR gerado**: 868KB execut·vel
+- ? **Warnings**: 2 (APIs deprecadas, n√£o cr√≠ticos)
+- ? **JAR gerado**: 868KB execut√°vel
 
-### 4. DocumentaÁ„o ?
-- ? `README.md` - DocumentaÁ„o principal
+### 4. Documenta√ß√£o ?
+- ? `README.md` - Documenta√ß√£o principal
 - ? `TODO.md` - Tarefas pendentes
 - ? `DEVELOPMENT.md` - Guia para desenvolvedores
-- ? `COMPARISON.md` - ComparaÁ„o com TSuite
+- ? `COMPARISON.md` - Compara√ß√£o com TSuite
 - ? `STATUS.md` - Status detalhado
 - ? `QUICKSTART.md` - Este arquivo
-- ? `.gitignore` - ConfiguraÁ„o Git
+- ? `.gitignore` - Configura√ß√£o Git
 
-## ?? Estrutura de DiretÛrios
+## ?? Estrutura de Diret√≥rios
 
 ```
 ~/.gemini/antigravity/playground/tensor-pulsar/
 ?
-??? src/                    # CÛdigo fonte Java (ISO-8859-1)
+??? src/                    # C√≥digo fonte Java (ISO-8859-1)
 ?   ??? mptoosm/
 ?       ??? DesktopApplication1.java
 ?       ??? DesktopApplication1View.java
 ?       ??? elementosMapa/  # Modelos (POI, Polyline, etc)
 ?       ??? mp/             # Parser PFM
-?       ??? utils/          # Utilit·rios
+?       ??? utils/          # Utilit√°rios
 ?
 ??? target/                 # Arquivos compilados
 ?   ??? pfm2osm-1.0-SNAPSHOT.jar
-?   ??? pfm2osm-1.0-SNAPSHOT-jar-with-dependencies.jar  ? Execut·vel
+?   ??? pfm2osm-1.0-SNAPSHOT-jar-with-dependencies.jar  ? Execut√°vel
 ?
 ??? lib/                    # Bibliotecas originais
-??? pom.xml                 # ConfiguraÁ„o Maven
-??? run.sh                  # Script de execuÁ„o
+??? pom.xml                 # Configura√ß√£o Maven
+??? run.sh                  # Script de execu√ß√£o
 ?
-??? DocumentaÁ„o/
+??? Documenta√ß√£o/
     ??? README.md           # Leia primeiro!
     ??? QUICKSTART.md       # Este arquivo
     ??? STATUS.md           # Status atual
-    ??? TODO.md             # PrÛximos passos
+    ??? TODO.md             # Pr√≥ximos passos
     ??? DEVELOPMENT.md      # Para desenvolvedores
-    ??? COMPARISON.md       # ComparaÁ„o com TSuite
+    ??? COMPARISON.md       # Compara√ß√£o com TSuite
 ```
 
 ## ?? Como Usar
 
-### Passo 1: Navegar atÈ o projeto
+### Passo 1: Navegar at√© o projeto
 ```bash
 cd ~/.gemini/antigravity/playground/tensor-pulsar
 ```
 
-### Passo 2: Compilar (se necess·rio)
+### Passo 2: Compilar (se necess√°rio)
 ```bash
 mvn clean package
 ```
 
 ### Passo 3: Executar
 ```bash
-# OpÁ„o mais f·cil
+# Op√ß√£o mais f√°cil
 ./run.sh
 
 # Ou diretamente
@@ -105,33 +105,33 @@ java -jar target/pfm2osm-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 
 ### Passo 4: Converter arquivo PFM
-1. Interface gr·fica abrir·
+1. Interface gr√°fica abrir√°
 2. Selecione arquivo `.mp` (formato PFM)
-3. Configure opÁıes
+3. Configure op√ß√µes
 4. Clique em "Converter"
-5. Arquivo `.osm` ser· gerado
+5. Arquivo `.osm` ser√° gerado
 
 ## ?? Projetos Relacionados
 
-### TSuite (ReferÍncia)
+### TSuite (Refer√™ncia)
 ```bash
 /Users/paulo/TSuite/TSuite/
 ```
 
 - Usa mesmo encoding (ISO-8859-1)
-- ContÈm `ConversorOsm.java` mais completo
-- Pode servir como referÍncia para melhorias
+- Cont√©m `ConversorOsm.java` mais completo
+- Pode servir como refer√™ncia para melhorias
 
 ### Projeto Original
 ```bash
 /Users/paulo/pfm2osm-code/
 ```
 
-- CÛdigo fonte original (abandonado)
+- C√≥digo fonte original (abandonado)
 - Copiado para tensor-pulsar
 - Mantido como backup
 
-## ??? Comandos ⁄teis
+## ??? Comandos √öteis
 
 ### Build
 ```bash
@@ -148,7 +148,7 @@ mvn clean package
 mvn package -DskipTests
 ```
 
-### ExecuÁ„o
+### Execu√ß√£o
 ```bash
 # Via script
 ./run.sh
@@ -168,10 +168,10 @@ tree -L 3
 # Ver arquivos Java
 find src -name "*.java"
 
-# Ver dependÍncias
+# Ver depend√™ncias
 mvn dependency:tree
 
-# Verificar vers„o Java
+# Verificar vers√£o Java
 java -version
 ```
 
@@ -179,40 +179,40 @@ java -version
 
 | Item | Status |
 |------|--------|
-| CompilaÁ„o | ? SUCCESS |
+| Compila√ß√£o | ? SUCCESS |
 | Encoding | ? ISO-8859-1 |
 | Erros | ? 0 |
-| Warnings | ?? 2 (n„o crÌticos) |
-| JAR Execut·vel | ? Gerado |
-| DocumentaÁ„o | ? Completa |
+| Warnings | ?? 2 (n√£o cr√≠ticos) |
+| JAR Execut√°vel | ? Gerado |
+| Documenta√ß√£o | ? Completa |
 | Testes | ? Pendente |
 
 ## ?? Avisos Importantes
 
 ### Encoding
-- **CÛdigo fonte**: ISO-8859-1 (Latin-1)
-- **Arquivos PFM**: V·rios (detectado automaticamente)
-- **SaÌda OSM**: UTF-8
+- **C√≥digo fonte**: ISO-8859-1 (Latin-1)
+- **Arquivos PFM**: V√°rios (detectado automaticamente)
+- **Sa√≠da OSM**: UTF-8
 
 ### Java
-- **Vers„o mÌnima**: Java 11
+- **Vers√£o m√≠nima**: Java 11
 - **Recomendado**: Java 11 LTS
 
 ### Warnings
 - 2 warnings sobre `Float()` constructor deprecado
-- N„o afetam funcionalidade
-- CorreÁ„o recomendada mas n„o urgente
+- N√£o afetam funcionalidade
+- Corre√ß√£o recomendada mas n√£o urgente
 
-## ?? PrÛximos Passos
+## ?? Pr√≥ximos Passos
 
 ### Imediato
-1. ? **Testar execuÁ„o**: `./run.sh`
-2. ? **Testar convers„o**: Com arquivo PFM real
-3. ? **Validar saÌda**: Verificar arquivo OSM gerado
+1. ? **Testar execu√ß√£o**: `./run.sh`
+2. ? **Testar convers√£o**: Com arquivo PFM real
+3. ? **Validar sa√≠da**: Verificar arquivo OSM gerado
 
 ### Curto Prazo
 4. ? **Corrigir warnings**: APIs deprecadas
-5. ? **Adicionar testes**: Unit·rios e integraÁ„o
+5. ? **Adicionar testes**: Unit√°rios e integra√ß√£o
 6. ? **Comparar com TSuite**: Identificar melhorias
 
 ### Longo Prazo
@@ -220,24 +220,24 @@ java -version
 8. ? **Otimizar performance**: Arquivos grandes
 9. ? **Adicionar CLI**: Modo linha de comando
 
-## ?? DocumentaÁ„o Adicional
+## ?? Documenta√ß√£o Adicional
 
-- **Uso b·sico**: Leia `README.md`
+- **Uso b√°sico**: Leia `README.md`
 - **Desenvolvimento**: Leia `DEVELOPMENT.md`
 - **Tarefas**: Veja `TODO.md`
 - **Status detalhado**: Veja `STATUS.md`
-- **ComparaÁ„o TSuite**: Veja `COMPARISON.md`
+- **Compara√ß√£o TSuite**: Veja `COMPARISON.md`
 
 ## ?? Resumo
 
 ? **Projeto revitalizado com sucesso!**
 
 - Compila sem erros
-- JAR execut·vel gerado
-- DocumentaÁ„o completa
+- JAR execut√°vel gerado
+- Documenta√ß√£o completa
 - Pronto para uso e desenvolvimento
 
-**LocalizaÁ„o**: `~/.gemini/antigravity/playground/tensor-pulsar`
+**Localiza√ß√£o**: `~/.gemini/antigravity/playground/tensor-pulsar`
 
 **Executar**: `./run.sh`
 
@@ -245,4 +245,4 @@ java -version
 
 **Data**: 2026-02-11  
 **Status**: ? Pronto para uso  
-**PrÛximo passo**: Testar com arquivo PFM real
+**Pr√≥ximo passo**: Testar com arquivo PFM real

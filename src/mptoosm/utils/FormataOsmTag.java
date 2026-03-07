@@ -113,7 +113,7 @@ public class FormataOsmTag {
 
 
                     //se o existe mais de um tipo de tag para a via
-                    //sempre pega tag.length-1(ultimo elemento do arry) que é a definicao osm
+                    //sempre pega tag.length-1(ultimo elemento do arry) que Ã© a definicao osm
                     if (tag[tag.length-1].contains(",")) {
                         String tags[] = tag[tag.length-1].split(",");
                         return retornaTag(tags);
@@ -166,7 +166,7 @@ public class FormataOsmTag {
     /**
      * Escapa caracteres especiais do XML para valores de atributos
      * Converte & para &amp;, < para &lt;, > para &gt;, " para &quot;, ' para &apos;
-     * tamb�m converte & para e quando apropriado (simplifica��o para casos de "&")
+     * também converte & para e quando apropriado (simplificação para casos de "&")
      * @param value valor a ser escapado
      * @return valor com caracteres especiais escapados
      */

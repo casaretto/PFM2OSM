@@ -1,42 +1,42 @@
-# Status do Projeto PFM2OSM - RevitalizaÁ„o
+# Status do Projeto PFM2OSM - Revitaliza√ß√£o
 
-## ? Trabalho ConcluÌdo (2026-02-11)
+## ? Trabalho Conclu√≠do (2026-02-11)
 
 ### 1. Setup Inicial do Projeto
-- ? Copiado cÛdigo fonte de `/Users/paulo/pfm2osm-code` para `/Users/paulo/.gemini/antigravity/playground/tensor-pulsar`
+- ? Copiado c√≥digo fonte de `/Users/paulo/pfm2osm-code` para `/Users/paulo/.gemini/antigravity/playground/tensor-pulsar`
 - ? Criado estrutura Maven moderna
-- ? Configurado `pom.xml` com todas as dependÍncias necess·rias
+- ? Configurado `pom.xml` com todas as depend√™ncias necess√°rias
 
-### 2. CorreÁıes de CompilaÁ„o
-- ? **Removido import deprecado**: `sun.misc.CharacterEncoder` (n„o utilizado)
+### 2. Corre√ß√µes de Compila√ß√£o
+- ? **Removido import deprecado**: `sun.misc.CharacterEncoder` (n√£o utilizado)
 - ? **Corrigido encoding**: Mudado de UTF-8 para **ISO-8859-1** (Latin-1)
   - Resolveu todos os erros de "unmappable character"
-  - CompatÌvel com TSuite
-  - MantÈm compatibilidade com arquivos PFM existentes
-- ? **Atualizado configuraÁ„o Maven**: Usando `--release 11` ao invÈs de `-source/-target`
+  - Compat√≠vel com TSuite
+  - Mant√©m compatibilidade com arquivos PFM existentes
+- ? **Atualizado configura√ß√£o Maven**: Usando `--release 11` ao inv√©s de `-source/-target`
 
-### 3. Build e CompilaÁ„o
-- ? **CompilaÁ„o bem-sucedida** sem erros
+### 3. Build e Compila√ß√£o
+- ? **Compila√ß√£o bem-sucedida** sem erros
 - ? **JAR gerado**: `target/pfm2osm-1.0-SNAPSHOT-jar-with-dependencies.jar` (868KB)
-- ? Apenas warnings de APIs deprecadas (n„o crÌticos)
+- ? Apenas warnings de APIs deprecadas (n√£o cr√≠ticos)
 
-### 4. DocumentaÁ„o Criada
-- ? **README.md**: DocumentaÁ„o completa do projeto
+### 4. Documenta√ß√£o Criada
+- ? **README.md**: Documenta√ß√£o completa do projeto
 - ? **TODO.md**: Lista de tarefas e melhorias futuras
 - ? **DEVELOPMENT.md**: Guia para desenvolvedores
-- ? **COMPARISON.md**: ComparaÁ„o com TSuite
+- ? **COMPARISON.md**: Compara√ß√£o com TSuite
 - ? **STATUS.md**: Este arquivo
-- ? **.gitignore**: ConfiguraÁ„o Git
+- ? **.gitignore**: Configura√ß√£o Git
 
-### 5. Scripts de ExecuÁ„o
+### 5. Scripts de Execu√ß√£o
 - ? **run.sh**: Script para executar o conversor facilmente
 
 ## ?? Estado Atual
 
-### CompilaÁ„o
+### Compila√ß√£o
 ```
 Status: ? BUILD SUCCESS
-Warnings: 2 (APIs deprecadas - n„o crÌticos)
+Warnings: 2 (APIs deprecadas - n√£o cr√≠ticos)
 Errors: 0
 Encoding: ISO-8859-1 (Latin-1)
 Java Version: 11
@@ -45,17 +45,17 @@ Java Version: 11
 ### Warnings Restantes
 1. **Float(double) constructor** em `Node.java:201`
    - Deprecado mas funcional
-   - SoluÁ„o: Usar `Float.valueOf()`
+   - Solu√ß√£o: Usar `Float.valueOf()`
    
 2. **Float(float) constructor** em `Util.java:54`
    - Deprecado mas funcional
-   - SoluÁ„o: Usar `Float.valueOf()`
+   - Solu√ß√£o: Usar `Float.valueOf()`
 
 ### Arquivos Gerados
 ```
 target/
 ??? pfm2osm-1.0-SNAPSHOT.jar                        (81KB)
-??? pfm2osm-1.0-SNAPSHOT-jar-with-dependencies.jar  (868KB) ? Execut·vel
+??? pfm2osm-1.0-SNAPSHOT-jar-with-dependencies.jar  (868KB) ? Execut√°vel
 ```
 
 ## ?? Como Usar
@@ -68,28 +68,28 @@ mvn clean package
 
 ### Executar
 ```bash
-# OpÁ„o 1: Via script
+# Op√ß√£o 1: Via script
 ./run.sh
 
-# OpÁ„o 2: Diretamente
+# Op√ß√£o 2: Diretamente
 java -jar target/pfm2osm-1.0-SNAPSHOT-jar-with-dependencies.jar
 
-# OpÁ„o 3: Via Maven
+# Op√ß√£o 3: Via Maven
 mvn exec:java -Dexec.mainClass="mptoosm.DesktopApplication1"
 ```
 
 ### Converter um Arquivo
-1. Execute a aplicaÁ„o (abre interface gr·fica)
+1. Execute a aplica√ß√£o (abre interface gr√°fica)
 2. Selecione arquivo `.mp` (PFM)
-3. Configure opÁıes de convers„o
+3. Configure op√ß√µes de convers√£o
 4. Clique em "Converter"
-5. Arquivo `.osm` ser· gerado no mesmo diretÛrio
+5. Arquivo `.osm` ser√° gerado no mesmo diret√≥rio
 
 ## ?? Estrutura do Projeto
 
 ```
 tensor-pulsar/
-??? src/                          # CÛdigo fonte (ISO-8859-1)
+??? src/                          # C√≥digo fonte (ISO-8859-1)
 ?   ??? mptoosm/
 ?       ??? DesktopApplication1*.java
 ?       ??? elementosMapa/
@@ -97,92 +97,92 @@ tensor-pulsar/
 ?       ??? utils/
 ??? lib/                          # Bibliotecas JAR originais
 ??? target/                       # Arquivos compilados
-??? pom.xml                       # ConfiguraÁ„o Maven
-??? README.md                     # DocumentaÁ„o principal
+??? pom.xml                       # Configura√ß√£o Maven
+??? README.md                     # Documenta√ß√£o principal
 ??? TODO.md                       # Tarefas pendentes
 ??? DEVELOPMENT.md                # Guia de desenvolvimento
-??? COMPARISON.md                 # ComparaÁ„o com TSuite
+??? COMPARISON.md                 # Compara√ß√£o com TSuite
 ??? STATUS.md                     # Este arquivo
-??? .gitignore                    # ConfiguraÁ„o Git
-??? run.sh                        # Script de execuÁ„o
+??? .gitignore                    # Configura√ß√£o Git
+??? run.sh                        # Script de execu√ß√£o
 ```
 
-## ?? RelaÁ„o com TSuite
+## ?? Rela√ß√£o com TSuite
 
-### LocalizaÁ„o TSuite
+### Localiza√ß√£o TSuite
 ```
 /Users/paulo/TSuite/TSuite/src/br/org/tracksource/tsuite/conversor/
 ??? ConversorOsm.java         # Conversor OSM mais completo
 ??? ConversorGarmin.java      # Conversor Garmin
 ??? ConversorNavitel.java     # Conversor Navitel
-??? osm/                      # MÛdulos OSM
+??? osm/                      # M√≥dulos OSM
 ```
 
 ### Compatibilidade
 - ? Mesmo encoding (ISO-8859-1)
 - ? Mesmo formato de entrada (PFM)
-- ? Mesmo formato de saÌda (OSM)
-- ?? PossÌvel integraÁ„o futura
+- ? Mesmo formato de sa√≠da (OSM)
+- ?? Poss√≠vel integra√ß√£o futura
 
-## ?? Warnings e ObservaÁıes
+## ?? Warnings e Observa√ß√µes
 
 ### Encoding
-- **Importante**: CÛdigo fonte est· em **ISO-8859-1**, n„o UTF-8
+- **Importante**: C√≥digo fonte est√° em **ISO-8859-1**, n√£o UTF-8
 - Arquivos PFM podem ter diferentes CodePages (detectado automaticamente)
-- SaÌda OSM È sempre UTF-8
+- Sa√≠da OSM √© sempre UTF-8
 
 ### APIs Deprecadas
 - `Float(double)` e `Float(float)` construtores
-- Marcados para remoÁ„o em Java futuro
+- Marcados para remo√ß√£o em Java futuro
 - Funcionam perfeitamente no Java 11
-- CorreÁ„o recomendada mas n„o urgente
+- Corre√ß√£o recomendada mas n√£o urgente
 
 ### Compatibilidade
 - Java 11+ requerido
 - Testado em macOS
 - Deve funcionar em Linux e Windows
 
-## ?? PrÛximos Passos Recomendados
+## ?? Pr√≥ximos Passos Recomendados
 
 ### Prioridade Alta
-1. **Testar convers„o real**
+1. **Testar convers√£o real**
    - Obter arquivo PFM de teste
-   - Executar convers„o
-   - Validar saÌda OSM
+   - Executar convers√£o
+   - Validar sa√≠da OSM
 
 2. **Corrigir APIs deprecadas**
    - Substituir `new Float()` por `Float.valueOf()`
    - Em `Node.java` e `Util.java`
 
-### Prioridade MÈdia
-3. **Adicionar testes unit·rios**
+### Prioridade M√©dia
+3. **Adicionar testes unit√°rios**
    - Criar estrutura de testes
    - Testar parsing PFM
-   - Testar geraÁ„o OSM
+   - Testar gera√ß√£o OSM
 
 4. **Comparar com TSuite**
    - Analisar `ConversorOsm.java`
    - Identificar melhorias
-   - Portar funcionalidades ˙teis
+   - Portar funcionalidades √∫teis
 
 ### Prioridade Baixa
 5. **Melhorias de interface**
-6. **OtimizaÁıes de performance**
-7. **DocumentaÁ„o adicional**
+6. **Otimiza√ß√µes de performance**
+7. **Documenta√ß√£o adicional**
 
 ## ?? Problemas Conhecidos
 
-Nenhum problema crÌtico identificado. O projeto compila e deve funcionar corretamente.
+Nenhum problema cr√≠tico identificado. O projeto compila e deve funcionar corretamente.
 
-## ?? Notas TÈcnicas
+## ?? Notas T√©cnicas
 
-### Decisıes de Design
-1. **Encoding ISO-8859-1**: Mantido para compatibilidade com cÛdigo original e TSuite
-2. **Java 11**: Vers„o LTS moderna mas n„o muito recente
+### Decis√µes de Design
+1. **Encoding ISO-8859-1**: Mantido para compatibilidade com c√≥digo original e TSuite
+2. **Java 11**: Vers√£o LTS moderna mas n√£o muito recente
 3. **Maven**: Build system moderno e amplamente suportado
-4. **Swing**: Mantido da vers„o original (GUI funcional)
+4. **Swing**: Mantido da vers√£o original (GUI funcional)
 
-### DependÍncias
+### Depend√™ncias
 - Apache Commons Lang 3.14.0
 - JDesktop AppFramework 1.0.3
 - JDesktop Swing Worker 1.1
@@ -192,21 +192,21 @@ Nenhum problema crÌtico identificado. O projeto compila e deve funcionar correta
 
 1. ? Projeto legado revitalizado
 2. ? Build moderno com Maven
-3. ? CompilaÁ„o sem erros
-4. ? DocumentaÁ„o completa
+3. ? Compila√ß√£o sem erros
+4. ? Documenta√ß√£o completa
 5. ? Pronto para uso e desenvolvimento
 
 ## ?? Suporte
 
-Para questıes sobre o projeto:
-- Consulte `README.md` para uso b·sico
+Para quest√µes sobre o projeto:
+- Consulte `README.md` para uso b√°sico
 - Consulte `DEVELOPMENT.md` para desenvolvimento
 - Consulte `TODO.md` para tarefas pendentes
-- Consulte `COMPARISON.md` para relaÁ„o com TSuite
+- Consulte `COMPARISON.md` para rela√ß√£o com TSuite
 
 ---
 
-**⁄ltima atualizaÁ„o**: 2026-02-11 11:09
+**√öltima atualiza√ß√£o**: 2026-02-11 11:09
 **Status**: ? Projeto pronto para uso
 **Build**: ? SUCCESS
-**PrÛximo passo**: Testar convers„o real com arquivo PFM
+**Pr√≥ximo passo**: Testar convers√£o real com arquivo PFM

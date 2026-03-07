@@ -42,3 +42,4 @@ Thumbs.db
 .env
 .history
 node_modules/
+.DS_Store

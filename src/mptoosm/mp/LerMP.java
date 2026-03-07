@@ -40,7 +40,7 @@ public class LerMP implements Runnable {
      * quando se da um unico nome ao conjunto de mais de uma mapa indica mpId_OsmId numeracao do arquivo final*/
     public static short qtArquivosCriados = 0;
     /**
-     * indica se È ou n„o para fazer convers„o de tipos para pseudo3d
+     * indica se √© ou n√£o para fazer convers√£o de tipos para pseudo3d
      */
     public static boolean transformaPseudo3D = false;
     /**
@@ -48,7 +48,7 @@ public class LerMP implements Runnable {
      */
     public static boolean isCriarAlertas = false;
     /**
-     * indica se È ara normalizar arquivos
+     * indica se √© ara normalizar arquivos
      */
     public static boolean normalizatxt = false;
     /**
@@ -81,8 +81,8 @@ public class LerMP implements Runnable {
     BufferedWriter bufferedWriteMapa;
     BufferedWriter outSpeedCam;
     /**
-     * guarda mpId_OsmId referencia do nÛ no mapa mp e referencia do nÛ do mapa osm e 
-     * mpId_OsmId ref no mp È 34 e no osm 56 entao fica 34 :56
+     * guarda mpId_OsmId referencia do n√≥ no mapa mp e referencia do n√≥ do mapa osm e 
+     * mpId_OsmId ref no mp √© 34 e no osm 56 entao fica 34 :56
      */
     public static HashMap<Integer, Integer> mpId_OsmId = new HashMap<Integer, Integer>(50);
     public static POI poi = new POI(); //transformei em public static 2013-07-19
@@ -150,7 +150,7 @@ public class LerMP implements Runnable {
     }
 
     public static int getProximoElementoOsmId() {
-        // Garante que IDs OSM sejam sempre positivos (compatÌvel com mkgmap)
+        // Garante que IDs OSM sejam sempre positivos (compat√≠vel com mkgmap)
         if (osmElementoId < 1) {
             osmElementoId = 1;
         }
@@ -269,7 +269,7 @@ public class LerMP implements Runnable {
             //      they and the ways using them appear throughout the PFM file
             while ((linha = leitor.readLine()) != null) {
                 if (linha.length() > 3 && !linha.startsWith(";")) {
-                    //remove espaÁos duplos
+                    //remove espa√ßos duplos
                     linha = linha.replaceAll("  ", " ");
                     if (linha.toLowerCase().contains("[restrict]")) {
                         restricao.clear();
@@ -296,7 +296,7 @@ public class LerMP implements Runnable {
 
                 if (linha.length() > 3 && !linha.startsWith(";")) {
                     
-                    //remove espaÁos duplos
+                    //remove espa√ßos duplos
                     linha = linha.replaceAll("  ", " ");
                     
                   
@@ -341,7 +341,7 @@ public class LerMP implements Runnable {
                         restricao.setValido(true);
                         isRestrictInicio = true;
                         isRestrictFim = false;
-                        mensagem.delete(0, mensagem.length()).append("Restricıes - lendo...");
+                        mensagem.delete(0, mensagem.length()).append("Restric√µes - lendo...");
                         porcentagem.delete(0, porcentagem.length()).append(Util.porcentagem(linhaAtual, linhasTotal));
                     } else if (linha.toLowerCase().contains("[end-restrict]") || (linha.equalsIgnoreCase("[END]") & isRestrictInicio)) {
                         isRestrictFim = true;
@@ -376,7 +376,7 @@ public class LerMP implements Runnable {
                         polyline_area.setValido(true);
                         isPolyline_areaInicio = true;
                         isPolyline_areaFim = false;
-                        mensagem.delete(0, mensagem.length()).append("¡reas - lendo...");
+                        mensagem.delete(0, mensagem.length()).append("√Åreas - lendo...");
                         porcentagem.delete(0, porcentagem.length()).append(Util.porcentagem(linhaAtual, linhasTotal));
                     } else if ((linha.equalsIgnoreCase("[END]") || linha.contains("[END-RGN80]"))
                             & isPolyline_areaInicio) {
@@ -489,7 +489,7 @@ public class LerMP implements Runnable {
             iniciaLeituraMPf();
             mensagem.delete(0, mensagem.length()).append("Leitura finalizada");
         } else {
-            System.out.println(arquivoMP + " n„o È um arquivo v·lido");
+            System.out.println(arquivoMP + " n√£o √© um arquivo v√°lido");
         }
     }
 
@@ -576,7 +576,7 @@ public class LerMP implements Runnable {
     }
 
     private void escrevePolyline_area() throws IOException {
-        mensagem.delete(0, mensagem.length()).append("¿reas - escrevendo...").append(polyline_area.polyline_areaLabel);
+        mensagem.delete(0, mensagem.length()).append("√Äreas - escrevendo...").append(polyline_area.polyline_areaLabel);
         porcentagem.delete(0, porcentagem.length()).append(Util.porcentagem(linhaAtual, linhasTotal));
 
         bufferedWriteMapa.append(polyline_area.getItensParaArquivoOSM());
@@ -617,7 +617,7 @@ public class LerMP implements Runnable {
                 outSpeedCam = new BufferedWriter(
                         new OutputStreamWriter(new FileOutputStream(
                         new File(arquivoOSM.toString() + ".SpeedCam.txt"), true), "Windows-1252"));
-                //cria cabeÁalho do speedcam
+                //cria cabe√ßalho do speedcam
                 //outSpeedCam.append("ID,X,Y,TYPE,SPEED,DirType,Direction\n");
             }
             //outSpeedCam.close();

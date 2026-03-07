@@ -7,14 +7,14 @@ JAR_FILE="target/pfm2osm-1.0-SNAPSHOT-jar-with-dependencies.jar"
 
 # Verifica se o JAR existe
 if [ ! -f "$JAR_FILE" ]; then
-    echo "? JAR n„o encontrado. Compilando projeto..."
+    echo "? JAR n√£o encontrado. Compilando projeto..."
     mvn clean package
     if [ $? -ne 0 ]; then
-        echo "? Erro na compilaÁ„o!"
+        echo "? Erro na compila√ß√£o!"
         exit 1
     fi
 fi
 
-# Executa a aplicaÁ„o
+# Executa a aplica√ß√£o
 echo "?? Iniciando PFM2OSM Converter..."
 java -jar "$JAR_FILE" "$@"

@@ -6,27 +6,27 @@
 
 ```
 mptoosm/
-??? DesktopApplication1.java          # Aplicação principal
+??? DesktopApplication1.java          # AplicaÃ§Ã£o principal
 ??? DesktopApplication1View.java      # View (GUI Swing)
-??? DesktopApplication1AboutBox.java  # Diálogo About
+??? DesktopApplication1AboutBox.java  # DiÃ¡logo About
 ??? elementosMapa/                    # Modelos de dados do mapa
 ?   ??? Cities.java                   # Cidades
-?   ??? Node.java                     # Nós (coordenadas)
-?   ??? Numeracao.java                # Numeração de endereços
-?   ??? Numeracoes.java               # Coleção de numerações
+?   ??? Node.java                     # NÃ³s (coordenadas)
+?   ??? Numeracao.java                # NumeraÃ§Ã£o de endereÃ§os
+?   ??? Numeracoes.java               # ColeÃ§Ã£o de numeraÃ§Ãµes
 ?   ??? POI.java                      # Points of Interest
 ?   ??? Polyline.java                 # Linhas (ruas, estradas)
-?   ??? Polyline_area.java            # Polígonos (áreas)
-?   ??? Regions.java                  # Regiões/Estados
-?   ??? Restricao.java                # Restrições de tráfego
+?   ??? Polyline_area.java            # PolÃ­gonos (Ã¡reas)
+?   ??? Regions.java                  # RegiÃµes/Estados
+?   ??? Restricao.java                # RestriÃ§Ãµes de trÃ¡fego
 ??? mp/
 ?   ??? LerMP.java                    # Parser principal PFM
 ??? utils/
-    ??? FormataOsmTag.java            # Formatação de tags OSM
-    ??? Util.java                     # Utilitários gerais
+    ??? FormataOsmTag.java            # FormataÃ§Ã£o de tags OSM
+    ??? Util.java                     # UtilitÃ¡rios gerais
 ```
 
-### Fluxo de Conversão
+### Fluxo de ConversÃ£o
 
 ```
 ???????????????
@@ -40,7 +40,7 @@ mptoosm/
 ?  (Parser Principal) ?
 ?                     ?
 ? 1. Detecta CodePage ?
-? 2. Lê seções PFM   ?
+? 2. LÃª seÃ§Ãµes PFM   ?
 ? 3. Parse elementos  ?
 ???????????????????????
        ?
@@ -57,7 +57,7 @@ mptoosm/
        ?
        ?
 ???????????????????????
-?  Geração OSM XML    ?
+?  GeraÃ§Ã£o OSM XML    ?
 ?                     ?
 ? - Nodes             ?
 ? - Ways              ?
@@ -77,28 +77,28 @@ mptoosm/
 
 **Responsabilidades**:
 - Ler arquivo PFM com encoding correto
-- Identificar seções do arquivo ([IMG ID], [POI], [POLYLINE], etc.)
+- Identificar seÃ§Ãµes do arquivo ([IMG ID], [POI], [POLYLINE], etc.)
 - Parsear cada tipo de elemento
-- Gerar saída OSM XML
+- Gerar saÃ­da OSM XML
 
-**Métodos Importantes**:
+**MÃ©todos Importantes**:
 - `iniciaLeituraMPf()`: Loop principal de leitura
 - `escreveLinha(String linha)`: Processa cada linha
 - `escrevePoi()`: Gera XML para POIs
 - `escrevePolyline()`: Gera XML para polylines
-- `escrevePolyline_area()`: Gera XML para polígonos
-- `escreveRestricoes()`: Gera XML para restrições
+- `escrevePolyline_area()`: Gera XML para polÃ­gonos
+- `escreveRestricoes()`: Gera XML para restriÃ§Ãµes
 
-**Seções PFM Suportadas**:
+**SeÃ§Ãµes PFM Suportadas**:
 - `[IMG ID]` - Metadados do mapa
-- `[Countries]` - Países
-- `[Regions]` - Regiões/Estados
+- `[Countries]` - PaÃ­ses
+- `[Regions]` - RegiÃµes/Estados
 - `[Cities]` - Cidades
 - `[ZipCodes]` - CEPs
 - `[POI]` / `[RGN10]` / `[RGN20]` - Pontos de interesse
 - `[POLYLINE]` / `[RGN40]` - Linhas (ruas)
-- `[POLYGON]` / `[RGN80]` - Polígonos (áreas)
-- `[RESTRICT]` - Restrições de tráfego
+- `[POLYGON]` / `[RGN80]` - PolÃ­gonos (Ã¡reas)
+- `[RESTRICT]` - RestriÃ§Ãµes de trÃ¡fego
 
 ### 2. Elementos do Mapa
 
@@ -117,35 +117,35 @@ Representa linhas (ruas, estradas, rios)
 - `Type`: Tipo Garmin (ex: 0x01 para estrada)
 - `Label`: Nome da via
 - `Data`: Lista de coordenadas
-- `RoadID`: ID para restrições de tráfego
-- `RouteParam`: Parâmetros de roteamento
+- `RoadID`: ID para restriÃ§Ãµes de trÃ¡fego
+- `RouteParam`: ParÃ¢metros de roteamento
 
 #### Polyline_area.java
-Representa áreas/polígonos (parques, lagos, edifícios)
+Representa Ã¡reas/polÃ­gonos (parques, lagos, edifÃ­cios)
 
 **Atributos principais**:
 - `Type`: Tipo Garmin
-- `Label`: Nome da área
+- `Label`: Nome da Ã¡rea
 - `Data`: Lista de coordenadas (fechada)
 
 #### Restricao.java
-Representa restrições de tráfego (proibido virar à esquerda, etc.)
+Representa restriÃ§Ãµes de trÃ¡fego (proibido virar Ã  esquerda, etc.)
 
 **Atributos principais**:
-- `Nod`: Nó onde ocorre a restrição
+- `Nod`: NÃ³ onde ocorre a restriÃ§Ã£o
 - `TraffRoads`: Vias envolvidas
 - `TraffPoints`: Pontos de controle
 
-### 3. Utilitários
+### 3. UtilitÃ¡rios
 
 #### FormataOsmTag.java
-Formata valores para tags OSM válidas
+Formata valores para tags OSM vÃ¡lidas
 
 #### Util.java
-Funções auxiliares:
+FunÃ§Ãµes auxiliares:
 - Contagem de linhas
-- Cálculo de porcentagem
-- Conversões de formato
+- CÃ¡lculo de porcentagem
+- ConversÃµes de formato
 
 ## ?? Desenvolvimento
 
@@ -184,7 +184,7 @@ java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 \
 public class NovoElemento {
     private String type;
     private String label;
-    // ... getters, setters, métodos
+    // ... getters, setters, mÃ©todos
     
     public String getItensParaArquivoOSM() {
         // Gera XML OSM
@@ -192,9 +192,9 @@ public class NovoElemento {
 }
 ```
 
-2. **Adicionar seção em `LerMP.java`**
+2. **Adicionar seÃ§Ã£o em `LerMP.java`**
 ```java
-// No método iniciaLeituraMPf()
+// No mÃ©todo iniciaLeituraMPf()
 else if (linha.contains("[NOVO_ELEMENTO]")) {
     novoElemento.clear();
     novoElemento.setValido(true);
@@ -213,7 +213,7 @@ private void escreveNovoElemento() throws IOException {
 
 ### Mapeamento de Tipos Garmin ? OSM
 
-O mapeamento está implementado em cada classe de elemento. Exemplo:
+O mapeamento estÃ¡ implementado em cada classe de elemento. Exemplo:
 
 **PFM**:
 ```
@@ -265,7 +265,7 @@ public void testParsePOI() {
 
 ## ?? Debugging
 
-### Logs Úteis
+### Logs Ãšteis
 
 O projeto usa `mensagem` e `porcentagem` para feedback:
 
@@ -277,44 +277,44 @@ porcentagem.delete(0, porcentagem.length()).append(Util.porcentagem(linhaAtual, 
 ### Arquivos de Debug
 
 - **SpeedCam.txt**: Alertas de velocidade gerados
-- **Arquivos .osm**: Saída OSM para inspeção
+- **Arquivos .osm**: SaÃ­da OSM para inspeÃ§Ã£o
 
 ### Problemas Comuns
 
 1. **Encoding incorreto**: Verificar CodePage no PFM
-2. **Coordenadas inválidas**: Validar formato Data0
-3. **Tags OSM inválidas**: Verificar caracteres especiais
+2. **Coordenadas invÃ¡lidas**: Validar formato Data0
+3. **Tags OSM invÃ¡lidas**: Verificar caracteres especiais
 
-## ?? Integração com TSuite
+## ?? IntegraÃ§Ã£o com TSuite
 
-O projeto TSuite (`/Users/paulo/TSuite/TSuite/`) contém código relacionado:
+O projeto TSuite (`/Users/paulo/TSuite/TSuite/`) contÃ©m cÃ³digo relacionado:
 
 - `ConversorOsm.java`: Conversor OSM mais completo
-- `ConversorGarmin.java`: Conversão para formato Garmin
-- Pode servir como referência para melhorias
+- `ConversorGarmin.java`: ConversÃ£o para formato Garmin
+- Pode servir como referÃªncia para melhorias
 
 ## ?? Recursos
 
-### Documentação de Formatos
+### DocumentaÃ§Ã£o de Formatos
 
 - **PFM Format**: [cGPSmapper Manual](http://cgpsmapper.com/buy.htm)
 - **OSM XML**: [OSM Wiki - XML Format](https://wiki.openstreetmap.org/wiki/OSM_XML)
 - **Garmin Types**: [Garmin Type Codes](https://wiki.openstreetmap.org/wiki/OSM_Map_On_Garmin/Type_Code_List)
 
-### Ferramentas Úteis
+### Ferramentas Ãšteis
 
-- **JOSM**: Editor OSM para validar saída
+- **JOSM**: Editor OSM para validar saÃ­da
 - **GPSMapEdit**: Editor de mapas PFM
 - **cGPSmapper**: Compilador PFM ? IMG
 
-## ?? Próximos Passos
+## ?? PrÃ³ximos Passos
 
 1. Corrigir warnings de encoding
-2. Implementar testes unitários
+2. Implementar testes unitÃ¡rios
 3. Adicionar modo CLI
-4. Melhorar documentação de código
+4. Melhorar documentaÃ§Ã£o de cÃ³digo
 5. Otimizar performance
 
 ---
 
-**Última atualização**: 2026-02-11
+**Ãšltima atualizaÃ§Ã£o**: 2026-02-11

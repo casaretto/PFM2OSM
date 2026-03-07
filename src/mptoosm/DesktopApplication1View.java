@@ -50,7 +50,7 @@ public class DesktopApplication1View extends FrameView {
         Integer messageTimeoutObj = resourceMap.getInteger("StatusBar.messageTimeout");
         int messageTimeout = (messageTimeoutObj != null) ? messageTimeoutObj.intValue() : 5000;
         if (messageTimeoutObj == null) {
-            System.err.println("[ERRO] StatusBar.messageTimeout n„o encontrado no ResourceMap. Usando valor padr„o 5000.");
+            System.err.println("[ERRO] StatusBar.messageTimeout n√£o encontrado no ResourceMap. Usando valor padr√£o 5000.");
         }
 
 
@@ -64,7 +64,7 @@ public class DesktopApplication1View extends FrameView {
         Integer busyAnimationRateObj = resourceMap.getInteger("StatusBar.busyAnimationRate");
         int busyAnimationRate = (busyAnimationRateObj != null) ? busyAnimationRateObj.intValue() : 30;
         if (busyAnimationRateObj == null) {
-            System.err.println("[ERRO] StatusBar.busyAnimationRate n„o encontrado no ResourceMap. Usando valor padr„o 30.");
+            System.err.println("[ERRO] StatusBar.busyAnimationRate n√£o encontrado no ResourceMap. Usando valor padr√£o 30.");
         }
         for (int i = 0; i < busyIcons.length; i++) {
             busyIcons[i] = resourceMap.getIcon("StatusBar.busyIcons[" + i + "]");
