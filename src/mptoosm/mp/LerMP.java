@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import mptoosm.elementosMapa.Cities;
+import mptoosm.elementosMapa.Countries;
 import mptoosm.elementosMapa.POI;
 import mptoosm.elementosMapa.Polyline;
 import mptoosm.elementosMapa.Polyline_area;
@@ -92,6 +93,7 @@ public class LerMP implements Runnable {
     public static Polyline_area polyline_area = new Polyline_area(); //transformei em public static 2013-07-19
     private Restricao restricao = new Restricao();
     public List<Restricao> restricoes = new ArrayList<Restricao>(15);
+    public static Countries paises;
     public static Regions estados;
     public static Cities cidades;
     static int osmElementoId = 1;
@@ -136,6 +138,7 @@ public class LerMP implements Runnable {
         isPOIFim = isPOIInicio = false;
         isPolylineFim = isPolylineInicio = false;
         isPolyline_areaFim = isPolyline_areaInicio = false;
+        paises = new Countries();
         estados = new Regions();
         cidades = new Cities();
         arquivoOSM = new StringBuilder();
@@ -309,9 +312,11 @@ public class LerMP implements Runnable {
                     } else if (linha.contains("[Countries]")) {
                         isCountriesInicio = true;
                         isCountriesFim = false;
+                        paises.setAtivo(true);
                     } else if (linha.contains("[END-Countries]") || (linha.equalsIgnoreCase("[END]") & isCountriesInicio)) {
                         isCountriesFim = true;
                         linha += "\n";
+                        paises.setAtivo(false);
                     } else if (linha.contains("[Regions]")) {
                         isRegionsInicio = true;
                         isRegionsFim = false;
@@ -503,7 +508,9 @@ public class LerMP implements Runnable {
     void escreveLinha(String linha) {
 
         try {
-            if (estados.isAtivo()) {
+            if (paises.isAtivo()) {
+                paises.adicionaLinha(linha);
+            } else if (estados.isAtivo()) {
                 estados.adicionaLinha(linha);
             } else if (cidades.isAtivo()) {
                 cidades.adicionaLinha(linha);

@@ -40,8 +40,8 @@ public class POI implements Comparable<POI> {
      */
     boolean isCompleto = false;
     String continenteTag = "\n  <tag k=\"is_in:continent\" v=\"South America\" />";
-    String brasilTag = "\n  <tag k=\"is_in:country\" v=\"Brazil\" />";
-    String brasilTagCode = "\n  <tag k=\"is_in:country_code\" v=\"BR\" />";
+    static String countryTag = "\n  <tag k=\"is_in:country\" v=\"Brazil\" />";
+    static String countryCodeTag = "\n  <tag k=\"is_in:country_code\" v=\"BR\" />";
     static List<String> a_poi_points = new ArrayList<String>(10);
     private String poiHouseNumber = "";
     private String fone = "";
@@ -253,8 +253,12 @@ public class POI implements Comparable<POI> {
      */
     String continentePaisRegiaoEstadoCidadeTags() {
         LerMP.mensagem.delete(0, LerMP.mensagem.length()).append("Escrevendo - POI - buscando cidade");
-        return continenteTag + brasilTag
-                + brasilTagCode + getRegiaoEstadoESigla();
+        if (LerMP.paises != null && !LerMP.paises.getCountryName().isEmpty()) {
+            countryTag = "\n  <tag k=\"is_in:country\" v=\"" + LerMP.paises.getCountryName() + "\" />";
+            countryCodeTag = "\n  <tag k=\"is_in:country_code\" v=\"" + LerMP.paises.getCountryCode() + "\" />";
+        }
+        return continenteTag + countryTag
+                + countryCodeTag + getRegiaoEstadoESigla();
     }
 
     /**
