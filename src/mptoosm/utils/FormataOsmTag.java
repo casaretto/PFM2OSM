@@ -35,10 +35,22 @@ public class FormataOsmTag {
     }
   
     public static StringBuilder getOsmType(List<String> tipos, String imgType, String label) {
+        String tipoProcurado = imgType.trim().toLowerCase();
         for (String a : tipos) {
-            
-            if (a.contains(imgType.toLowerCase())) {
-                String tag[] = a.split("::");
+            String tag[] = a.split("::");
+
+            //compara o tipo procurado com cada código de tipo alternativo da entrada
+            //(todos os elementos exceto o último, que é a definição da tag osm),
+            //usando igualdade exata - não substring, para não confundir p.ex. "0x2" com "0x28"
+            boolean tipoCoincide = false;
+            for (int i = 0; i < tag.length - 1; i++) {
+                if (tag[i].split(",")[0].trim().toLowerCase().equals(tipoProcurado)) {
+                    tipoCoincide = true;
+                    break;
+                }
+            }
+
+            if (tipoCoincide) {
 
                 String garmin_type = tag[0].split(",")[0];
 
