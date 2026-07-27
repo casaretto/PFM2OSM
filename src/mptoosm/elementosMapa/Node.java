@@ -173,6 +173,13 @@ public class Node {
         return "" + longitude + ","+ latitude;
     }
 
+    /**
+     * Retorna {latitude, longitude} deste nó.
+     */
+    public double[] getLatLong() {
+        return new double[]{latitude, longitude};
+    }
+
     public final boolean equals(Node other) {
         boolean xequals = latitude == other.latitude;
         boolean yequals = longitude == other.longitude;

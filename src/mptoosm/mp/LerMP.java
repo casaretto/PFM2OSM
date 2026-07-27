@@ -86,6 +86,13 @@ public class LerMP implements Runnable {
      * mpId_OsmId ref no mp é 34 e no osm 56 entao fica 34 :56
      */
     public static HashMap<Integer, Integer> mpId_OsmId = new HashMap<Integer, Integer>(50);
+    /**
+     * guarda a coordenada (lat,lon) com a qual cada referência de nó compartilhado
+     * (Nod=) do mp foi vista pela primeira vez, para detectar referências
+     * reaproveitadas indevidamente no arquivo fonte (mesmo número apontando
+     * para interseções fisicamente distantes/diferentes)
+     */
+    public static HashMap<Integer, double[]> mpId_Coords = new HashMap<Integer, double[]>(50);
     public static POI poi = new POI(); //transformei em public static 2013-07-19
     int poiqt = 1;
     public static Polyline polyline = new Polyline(); //transformei em public static 2013-07-19
@@ -150,6 +157,7 @@ public class LerMP implements Runnable {
 //        polyline_area.clear();
 //        isRunMaptool = false;
         mpId_OsmId.clear();
+        mpId_Coords.clear();
     }
 
     public static int getProximoElementoOsmId() {

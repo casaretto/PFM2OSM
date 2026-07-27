@@ -488,22 +488,48 @@ public class Polyline {
              * 0 = numero d nó  968604= id no mp - 0:968604
              */
             String[] relacao = item.substring(item.indexOf("=") + 1, item.length()).split(",");
+            int indiceNoLista = Integer.parseInt(relacao[0]);
+            int mpRefId = Integer.parseInt(relacao[1]);
+            Node esteNo = listaNos.get(indiceNoLista);
 
             //verifica se já foi adicionado nó com o mesmo mpId
-            if (LerMP.mpId_OsmId.containsKey(Integer.parseInt(relacao[1]))) {
-                //seta o nó para não ser escrito no arquivo osm somente a sua referencia na way
-                listaNos.get(Integer.parseInt(relacao[0])).isReferenciaAOutroNo = true;
-                //seta o id osm do nó
-//                listaNos.get(Integer.parseInt(relacao[0])).noOsmId =
-                listaNos.get(Integer.parseInt(relacao[0])).setNoOsmId(
-                        LerMP.mpId_OsmId.get(Integer.parseInt(relacao[1])));
-                listaNos.get(Integer.parseInt(relacao[0])).noMpfId = Integer.parseInt(relacao[1]);
-            } else {
-                //armazena mpId_OsmId referencia do mpId do nó com o seu osmId
-                LerMP.mpId_OsmId.put(Integer.parseInt(relacao[1]), listaNos.get(Integer.parseInt(relacao[0])).getNoOsmId());
-                listaNos.get(Integer.parseInt(relacao[0])).noMpfId = Integer.parseInt(relacao[1]);
+            //LIMITE_METROS_NO_COMPARTILHADO: acima disso, duas referências ao mesmo
+            //id de nó do mp não podem ser fisicamente o mesmo ponto - trata-se de um
+            //id de nó reaproveitado por engano no arquivo fonte (.mp), não de um
+            //cruzamento real compartilhado entre vias
+            final double LIMITE_METROS_NO_COMPARTILHADO = 1000;
+            boolean referenciaJaExiste = LerMP.mpId_OsmId.containsKey(mpRefId);
+            boolean localizacaoCompativel = false;
+            if (referenciaJaExiste) {
+                double[] coordAnterior = LerMP.mpId_Coords.get(mpRefId);
+                Node noAnterior = new Node();
+                noAnterior.setNodeLevel(esteNo.nodeLevel);
+                noAnterior.latitude = coordAnterior[0];
+                noAnterior.longitude = coordAnterior[1];
+                localizacaoCompativel = esteNo.distance(noAnterior) <= LIMITE_METROS_NO_COMPARTILHADO;
             }
-            
+            if (referenciaJaExiste && localizacaoCompativel) {
+                //seta o nó para não ser escrito no arquivo osm somente a sua referencia na way
+                esteNo.isReferenciaAOutroNo = true;
+                //seta o id osm do nó
+                esteNo.setNoOsmId(LerMP.mpId_OsmId.get(mpRefId));
+                esteNo.noMpfId = mpRefId;
+            } else {
+                if (LerMP.mpId_OsmId.containsKey(mpRefId)) {
+                    //id de nó do mp reaproveitado apontando para um lugar fisicamente
+                    //diferente - provável erro no arquivo fonte. Não solda os dois
+                    //pontos; mantém este nó como um ponto novo e independente.
+                    System.err.println("AVISO: referência de nó do mp (" + mpRefId
+                            + ") reaproveitada para um ponto distante do original - "
+                            + "ignorando compartilhamento (possível erro no .mp). RoadID="
+                            + polylineRoadID);
+                }
+                //armazena mpId_OsmId referencia do mpId do nó com o seu osmId
+                LerMP.mpId_OsmId.put(mpRefId, esteNo.getNoOsmId());
+                LerMP.mpId_Coords.put(mpRefId, esteNo.getLatLong());
+                esteNo.noMpfId = mpRefId;
+            }
+
         }
         
     }
