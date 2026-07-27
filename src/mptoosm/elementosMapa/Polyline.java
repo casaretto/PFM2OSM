@@ -132,7 +132,7 @@ public class Polyline {
             } else if ((item.substring(0, 6).contains("Data") && item.substring(4, 7).contains("="))
                     || item.contains("Origin0")) {
                 polylineLevel = Short.parseShort(item.substring(item.indexOf("=") - 1, item.indexOf("=")));
-                if (polylineLevel == 0 && polylineLabel.length() > 1) {
+                if (polylineLevel == 0) {
                     polylineOsmId = LerMP.getProximoElementoOsmId();
                     criaNodeList(new StringBuilder(item));
                 } else {
@@ -210,7 +210,7 @@ public class Polyline {
                     } else
                         retorno.append(FormataOsmTag.retornaTag("name=" + polylineLabel));
                 }
-            } else
+            } else if (polylineLabel.trim().length() > 0)
                 retorno.append(FormataOsmTag.retornaTag("name=" + polylineLabel));
 
             //way may have an alternative label (Label2=... in PFM)

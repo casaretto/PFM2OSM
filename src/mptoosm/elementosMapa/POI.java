@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import mptoosm.DesktopApplication1View;
 import mptoosm.mp.LerMP;
 import mptoosm.utils.FormataOsmTag;
 
@@ -612,7 +611,7 @@ public class POI implements Comparable<POI> {
 
         } else if (poiType.equalsIgnoreCase("0x650C")) {
 
-            if(  DesktopApplication1View.lerArquivoMp.isRunMaptool )
+            if(  LerMP.isRunMaptool )
                 return FormataOsmTag.retornaTag("place=locality"); //Maptool does not recognize place=island
             else
                 return FormataOsmTag.retornaTag("place=island");//for general purpose OSM

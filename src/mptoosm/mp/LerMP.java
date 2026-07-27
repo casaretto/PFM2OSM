@@ -105,7 +105,7 @@ public class LerMP implements Runnable {
     public static String changeset = " ";
     public static String visible = " visible=\"true\"";
     public static String version = " "; //" version=\"1\""; //absence of version attribute is only acceptable for negative IDs
-    public boolean isRunMaptool = false;
+    public static boolean isRunMaptool = false;
     public int maisDeUmMapaConvertido = -1;
     public static int alertaId = 0;
     public boolean ultimoMapaParaProcessa;

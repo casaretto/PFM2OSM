@@ -35,7 +35,7 @@ public class DesktopApplication1View extends FrameView {
 
     JFileChooser jFileChooserCaminhoArquivo = new JFileChooser();
     List<File> listadeArquivos = new ArrayList<File>();
-    public static LerMP lerArquivoMp = new LerMP();
+    public static LerMP lerArquivoMp;
     // Get current time
     long start = 0, tempo_total=0;
 

@@ -60,7 +60,7 @@ public class Polyline_area {
             } else if ((item.substring(0, 6).contains("Data") && item.substring(4, 7).contains("="))
                     || item.contains("Origin0")) {
                 polyline_areaLevel = Short.parseShort(item.substring(item.indexOf("=") - 1, item.indexOf("=")));
-                if (polyline_areaLevel == 0 && polyline_areaLabel.length() > 1) {
+                if (polyline_areaLevel == 0) {
                     polyline_areaOsmId = LerMP.getProximoElementoOsmId();
                     criaNodeList(new StringBuilder(item));
                 } else {
@@ -88,7 +88,9 @@ public class Polyline_area {
             if( LerMP.boolIncludeInfoForCompilers )
                 retorno.append(FormataOsmTag.retornaTag("polygon_img_type="+polyline_areaType));
             
-            retorno.append(FormataOsmTag.retornaTag("name=" + polyline_areaLabel)).append("\n </way>");
+            if (polyline_areaLabel.trim().length() > 0)
+                retorno.append(FormataOsmTag.retornaTag("name=" + polyline_areaLabel));
+            retorno.append("\n </way>");
         }
         return retorno;
     }
