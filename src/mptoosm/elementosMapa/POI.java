@@ -358,7 +358,7 @@ public class POI implements Comparable<POI> {
                    poiLabel.toUpperCase().contains("OPTICA") ||
                    poiLabel.toUpperCase().contains("ÓCULOS") ||
                    poiLabel.toUpperCase().contains("OCULOS") ) {
-            return FormataOsmTag.retornaTag("shop=erotic");
+            return FormataOsmTag.retornaTag("shop=optician");
         } else if (poiType.equalsIgnoreCase("0x2C05")) {
             //se for universidade
             if (poiLabel.toUpperCase().contains("UNIVERSIDADE")
