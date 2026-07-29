@@ -218,8 +218,10 @@ public class Polyline_area {
         polyline_area_types.add("0x19::0x6e::leisure=sports_centre");//osm.c
         polyline_area_types.add("0x1a::landuse=cemetery");//osm.c
         polyline_area_types.add("0x28::natural=coastline");//osm.c
-        polyline_area_types.add("0x41::natural=water");//osm.c
-        polyline_area_types.add("0x4b::boundary=administrative" + ( LerMP.boolCreateStarTagsForUnrecognizesPFMAttributes ? ",*=fundo_de_mapa" : "") );//osm.c
+        polyline_area_types.add("0x3c::0x40::0x41::natural=water");//osm.c - Lago, Represa, Grande Rio (0x3c/0x40 estavam sem mapeamento na tabela ativa; só existiam em FormataOsmTag.getPolygonToOsmType, método nunca chamado)
+        polyline_area_types.add("0x48::0x49::waterway=riverbank");//osm.c - Margem de rio largo
+        polyline_area_types.add("0x6::0x06::amenity=parking,parking=underground");//osm.c - Estacionamento coberto/subterrâneo
+        polyline_area_types.add("0x4b::place=town" + ( LerMP.boolCreateStarTagsForUnrecognizesPFMAttributes ? ",*=fundo_de_mapa" : "") );//osm.c - "Fundo de Mapa Amarelo"; era boundary=administrative, tag sem regra correspondente no estilo (mkgmap-style-mapear/polygons espera place=town para este ícone)
         polyline_area_types.add("0x4c::natural=marsh,natural=wetland");//osm.c natural=marsh não é mais usado no osm soemnte no garmin
         polyline_area_types.add("0x4e::landuse=farm");//osm.c
         polyline_area_types.add("0x4f::natural=scrub");//osm.c
