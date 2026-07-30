@@ -228,6 +228,11 @@ public class Polyline_area {
         polyline_area_types.add("0x50::landuse=forest");//osm.c
         polyline_area_types.add("0x51::landuse=residential");//osm.c
         polyline_area_types.add("0x53::natural=land");//osm.c
+        // gaps identificados na análise de 2026-07-30 (documentos/analise 1.txt, comparação do David):
+        polyline_area_types.add("0x1::landuse=residential");//osm.c - City (large urban area)
+        polyline_area_types.add("0x2::landuse=residential");//osm.c - City (small/urban area) - contorno de cidade, ex: Santa Teresa del Tuy
+        polyline_area_types.add("0x3::landuse=residential");//osm.c - City (rural housing area)
+        polyline_area_types.add("0xe::0x0e::aeroway=runway");//osm.c - Airport runway (como área/polígono)
       
 
 

@@ -863,6 +863,7 @@ public class POI implements Comparable<POI> {
 
         a_poi_points.add("0x2f0e::amenity=car_wash"); //osm.c
         a_poi_points.add("0x2f12::internet_access=wlan"); //osm.c
+        a_poi_points.add("0x2f00::office=yes"); //gap identificado na análise de 2026-07-30: maior tipo de POI ausente (11.269 ocorrências no 58220.mp), sem tag nenhum antes desta linha
 
 
         a_poi_points.add("0x3002::0x6408::amenity=hospital"); //osm.c
