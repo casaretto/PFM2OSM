@@ -196,8 +196,13 @@ public class POI implements Comparable<POI> {
                 || poiType.equalsIgnoreCase("0x700") || poiType.equalsIgnoreCase("0x7")
                 || poiType.equalsIgnoreCase("0x800")|| poiType.equalsIgnoreCase("0x8")
                 || poiType.equalsIgnoreCase("0x900") || poiType.equalsIgnoreCase("0x9")
-                // || poiType.equalsIgnoreCase("0xa00") || poiType.equalsIgnoreCase("0xb00")
-                //|| poiType.equalsIgnoreCase("0xc00")
+                || poiType.equalsIgnoreCase("0xa00") || poiType.equalsIgnoreCase("0xa")
+                || poiType.equalsIgnoreCase("0xb00") || poiType.equalsIgnoreCase("0xb")
+                || poiType.equalsIgnoreCase("0xc00") || poiType.equalsIgnoreCase("0xc")
+                || poiType.equalsIgnoreCase("0xd00") || poiType.equalsIgnoreCase("0xd")
+                || poiType.equalsIgnoreCase("0xe00") || poiType.equalsIgnoreCase("0xe")
+                || poiType.equalsIgnoreCase("0xf00") || poiType.equalsIgnoreCase("0xf")
+                || poiType.equalsIgnoreCase("0x1000") || poiType.equalsIgnoreCase("0x1100")
                 )
                 & no.getNodeLevel() == 0 & !poiLabel.toUpperCase().contains("BAIRRO ")
                 & !poiLabel.toUpperCase().contains("VILA ") & !poiLabel.toUpperCase().contains("ASSENTAMENTO ")
@@ -326,6 +331,17 @@ public class POI implements Comparable<POI> {
                     retorno.append(FormataOsmTag.retornaTag("place=village"));
                 } else
                     retorno.append(FormataOsmTag.retornaTag("place=town")); //2013-12-25: era place=locality
+            // settlement tiers menores (0xa00-0xb00: 5-20 mil habitantes; 0xc00-0xd00: 1-5 mil; 0xe00-0x1100: menos de 1 mil)
+            } else if (poiType.equalsIgnoreCase("0xa00") || poiType.equalsIgnoreCase("0xa")
+                    || poiType.equalsIgnoreCase("0xb00") || poiType.equalsIgnoreCase("0xb")) {
+                retorno.append(FormataOsmTag.retornaTag("place=town"));
+            } else if (poiType.equalsIgnoreCase("0xc00") || poiType.equalsIgnoreCase("0xc")
+                    || poiType.equalsIgnoreCase("0xd00") || poiType.equalsIgnoreCase("0xd")) {
+                retorno.append(FormataOsmTag.retornaTag("place=village"));
+            } else if (poiType.equalsIgnoreCase("0xe00") || poiType.equalsIgnoreCase("0xe")
+                    || poiType.equalsIgnoreCase("0xf00") || poiType.equalsIgnoreCase("0xf")
+                    || poiType.equalsIgnoreCase("0x1000") || poiType.equalsIgnoreCase("0x1100")) {
+                retorno.append(FormataOsmTag.retornaTag("place=hamlet"));
             } else {
 //                retornoGeral.append(FormataOsmTag.retornaTag("place=city"));
                 retorno.append(FormataOsmTag.retornaTag("place=town"));
