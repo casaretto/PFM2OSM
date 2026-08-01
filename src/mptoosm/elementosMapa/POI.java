@@ -866,6 +866,8 @@ public class POI implements Comparable<POI> {
         a_poi_points.add("0x2f00::office=yes"); //gap identificado na análise de 2026-07-30: maior tipo de POI ausente (11.269 ocorrências no 58220.mp), sem tag nenhum antes desta linha
         a_poi_points.add("0x2c00::tourism=attraction"); //gap identificado em 2026-07-30 - "Attraction" genérico (pai de 0x2c02 museu, 0x2c06 parque, 0x2c07 zoo etc, já tratados)
         a_poi_points.add("0x6400::man_made=yes"); //gap identificado em 2026-07-30 - "Manmade Feature" genérico (pai de 0x6401 ponte, 0x6402 prédio, 0x6403 cemitério etc, já tratados)
+        a_poi_points.add("0x2f11::shop=yes"); //confirmado pelo David em 2026-07-30: "Commercial Shops" - reaproveita o mesmo tag/ícone genérico já usado pelo fallback de 0x2e0a
+        a_poi_points.add("0x3007::office=government"); //confirmado pelo David em 2026-07-30: "Government Office" (código não documentado no manual cGPSmapper, mas com significado confirmado pelo criador do .mp)
 
 
         a_poi_points.add("0x3002::0x6408::amenity=hospital"); //osm.c
